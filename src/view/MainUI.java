@@ -39,19 +39,19 @@ public class MainUI {
             
             switch (opcao) {
                 case 1:
-                    new PetUI().showMenu(petMap);
+                    new PetUI(petMap, clienteMap).showMenu();
                     break;
                     
                 case 2:
-                    new ClienteUI().showMenu(clienteMap);
+                    new ClienteUI(clienteMap).showMenu();
                     break;
                 
                 case 3:
-                    new ServicoUI().showMenu(servicoMap);
+                    //new ServicoUI().showMenu(servicoMap);
                     break;
                 
                 case 4:
-                    new VendaUI().showMenu(vendaMap);
+                    //new VendaUI().showMenu(vendaMap);
                     break;
                     
                 default:
