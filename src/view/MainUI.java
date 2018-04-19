@@ -20,7 +20,7 @@ import util.Console;
 public class MainUI {
     
     Map<Integer, Pet> petMap = new HashMap<>();
-    Map<Integer, Cliente> clienteMap = new HashMap<>();
+    Map<String, Cliente> clienteMap = new HashMap<>();
     Map<Integer, Servico> servicoMap = new HashMap<>();
     Map<Integer, VendaServico> vendaMap = new HashMap<>();
     
