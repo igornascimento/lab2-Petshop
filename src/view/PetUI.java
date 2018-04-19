@@ -6,6 +6,7 @@
 package view;
 
 import java.util.Map;
+import lab2.petshop.model.Cliente;
 import lab2.petshop.model.Pet;
 import util.Console;
 
@@ -15,10 +16,18 @@ import util.Console;
  */
 public class PetUI {
 
-    Map<Integer, Pet> petMap;
+    private static int id = 0;
+    private Map<Integer, Pet> petMap;
+    private Map<Integer, Cliente> clienteMap;
+    private ClienteUI clienteUI;
     
-    public void showMenu(Map petMap) {
+    public PetUI(Map petMap, Map clienteMap) {
         this.petMap = petMap;
+        this.clienteMap = clienteMap;
+        this.clienteUI = new ClienteUI(clienteMap);
+    }
+    
+    public void showMenu() {
         int opcao = 0;
         
         do {
@@ -31,24 +40,56 @@ public class PetUI {
             opcao = Console.scanInt("Informe a opção para prosseguir:");
             
             switch (opcao) {
-                case 1:
-                    cadastrarPet();
-                    break;
-                    
-                default:
-                    System.out.println("Opção inválida.");
-                    break;
-                    
+                case 1:  cadastrar(); break;
+                case 2:  listar(); break;
+                case 3:  remover(); break;
+                default: System.out.println("Opção inválida."); break;
             }
-            
         } while(opcao != 0);
-        
     }
     
-    public void cadastrarPet() {
-        Pet pet = new Pet(Console.scanString("Nome:"),
-                          Console.scanString("Tipo de animal (gato|cachorro)"),
-                          Console.scanString("Cliente"));
+    public void cadastrar() {
+        Cliente cliente = selecionarCliente();
+        if (cliente != null) {
+            Pet pet = new Pet(
+                Console.scanString("Nome do pet:"),
+                Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
+                cliente);
+            petMap.put(++this.id, pet);
+            System.out.println("\nPet cadastrado com sucesso!");
+        }
+    }
+    
+    public Cliente selecionarCliente() {
+        clienteUI.listarClientes();
+        String doc = Console.scanString("Para prosseguir, informe o RG do proprietário do pet (ou 0 para voltar):");
+        Cliente cliente = clienteUI.buscarPorRg(doc);
+        return cliente;
+    }
+    
+    public void listar() {
+        System.out.println(
+            String.format("%-20s", "|ID") + "\t" +
+            String.format("%-20s", "|Nome") + "\t" +
+            String.format("%-20s", "|Tipo") + "\t" +
+            String.format("%-20s", "|Proprietário")
+        );
+        
+        petMap.forEach((id, pet) -> {
+            System.out.println(
+                String.format("%-20s", "|" + id) + "\t" +
+                String.format("%-20s", "|" + pet.getNome()) + "\t" +
+                String.format("%-20s", "|" + pet.getTipo()) + "\t" +
+                String.format("%-20s", "|" + pet.getCliente().getNome())
+            );
+        });
+    }
+    
+    public void remover() {
+        listar();
+        int id = Console.scanInt("Informe o ID do pet para remover:");
+        petMap.remove(id);
+        System.out.println("Registro removido com sucesso!");
     }
     
 }

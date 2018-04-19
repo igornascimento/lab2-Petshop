@@ -11,13 +11,13 @@ public class Pet {
 	private static Random petIdGenerator = new Random();
 	private int id;
 	private String nome;
-	private String tipo;
+	private int tipo;
 	private Cliente cliente;
 	
 	public Pet() {
 	}
 	
-	public Pet(String nome, String tipo, Cliente cliente) {
+	public Pet(String nome, int tipo, Cliente cliente) {
 		this.id = petIdGenerator.nextInt(100);
 		this.nome = nome;
 		this.tipo = tipo;
@@ -36,11 +36,11 @@ public class Pet {
 		this.nome = nome;
 	}
 
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 
