@@ -15,10 +15,13 @@ import util.Console;
  */
 public class ClienteUI {
     
-    Map<String, Cliente> clienteMap;
+    private Map<String, Cliente> clienteMap;
     
-    public void showMenu(Map clienteMap) {
+    public ClienteUI(Map clienteMap) {
         this.clienteMap = clienteMap;
+    }
+    
+    public void showMenu() {
         int opcao = 0;
         
         do {
@@ -53,7 +56,7 @@ public class ClienteUI {
         clienteMap.put(doc, cliente);
     }
     
-    public void listarCliente() {
+    public void listarClientes() {
         System.out.println(
             String.format("%-20s", "|RG") + "\t" +
             String.format("%-20s", "|Nome") + "\t" +
@@ -67,6 +70,13 @@ public class ClienteUI {
                 String.format("%-20s", "|" + cliente.getTelefone())
             );
         });
+    }
+    
+    public Cliente buscarPorRg(String doc) {
+        if (clienteMap.containsKey(doc)) {
+            return clienteMap.get(doc);
+        }
+        return null;
     }
     
     public void deletarCliente() {
