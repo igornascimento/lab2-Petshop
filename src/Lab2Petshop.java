@@ -1,4 +1,4 @@
-package lab2.petshop;
+
 
 import view.MainUI;
 

@@ -6,7 +6,7 @@
 package view;
 
 import java.util.Map;
-import lab2.petshop.model.Cliente;
+import model.Cliente;
 import util.Console;
 
 /**
@@ -34,19 +34,16 @@ public class ClienteUI {
             opcao = Console.scanInt("Informe a opção para prosseguir:");
             
             switch (opcao) {
-                case 1:
-                    cadastrarCliente();
-                    break;
-                    
-                default:
-                    System.out.println("Opção inválida.");
-                    break;
+                case 1: cadastrar(); break;
+                case 2: listar(); break;
+                case 3: remover(); break;
+                default: System.out.println("Opção inválida."); break;
             }
         } while(opcao != 0);
         
     }
 
-    public void cadastrarCliente() {
+    public void cadastrar() {
         String doc = Console.scanString("RG:");
         Cliente cliente = new Cliente(
             doc,
@@ -56,7 +53,7 @@ public class ClienteUI {
         clienteMap.put(doc, cliente);
     }
     
-    public void listarClientes() {
+    public void listar() {
         System.out.println(
             String.format("%-20s", "|RG") + "\t" +
             String.format("%-20s", "|Nome") + "\t" +
@@ -79,7 +76,7 @@ public class ClienteUI {
         return null;
     }
     
-    public void deletarCliente() {
+    public void remover() {
         String doc = Console.scanString("Informe o RG:");
         this.clienteMap.remove(doc);
     }

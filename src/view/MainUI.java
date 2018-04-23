@@ -7,10 +7,10 @@ package view;
 
 import java.util.HashMap;
 import java.util.Map;
-import lab2.petshop.model.Cliente;
-import lab2.petshop.model.Pet;
-import lab2.petshop.model.Servico;
-import lab2.petshop.model.VendaServico;
+import model.Cliente;
+import model.Pet;
+import model.Servico;
+import model.VendaServico;
 import util.Console;
 
 /**

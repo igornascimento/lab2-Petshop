@@ -6,8 +6,8 @@
 package view;
 
 import java.util.Map;
-import lab2.petshop.model.Cliente;
-import lab2.petshop.model.Pet;
+import model.Cliente;
+import model.Pet;
 import util.Console;
 
 /**
@@ -61,7 +61,7 @@ public class PetUI {
     }
     
     public Cliente selecionarCliente() {
-        clienteUI.listarClientes();
+        clienteUI.listar();
         String doc = Console.scanString("Para prosseguir, informe o RG do proprietário do pet (ou 0 para voltar):");
         Cliente cliente = clienteUI.buscarPorRg(doc);
         return cliente;
@@ -79,7 +79,7 @@ public class PetUI {
             System.out.println(
                 String.format("%-20s", "|" + id) + "\t" +
                 String.format("%-20s", "|" + pet.getNome()) + "\t" +
-                String.format("%-20s", "|" + pet.getTipo()) + "\t" +
+                String.format("%-20s", "|" + (pet.getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
                 String.format("%-20s", "|" + pet.getCliente().getNome())
             );
         });

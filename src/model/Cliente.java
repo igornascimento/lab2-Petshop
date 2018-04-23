@@ -1,4 +1,4 @@
-package lab2.petshop.model;
+package model;
 
 /**
  *
