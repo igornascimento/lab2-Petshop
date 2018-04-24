@@ -32,7 +32,7 @@ public class MainUI {
             System.out.println("1- Pets;");
             System.out.println("2- Clientes;");
             System.out.println("3- Serviços;");
-            System.out.println("0- Vendas;");
+            System.out.println("4- Vendas;");
             System.out.println("0- Sair;");
             
             opcao = Console.scanInt("Informe sua opção para prosseguir:");

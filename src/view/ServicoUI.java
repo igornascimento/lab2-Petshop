@@ -61,6 +61,7 @@ public class ServicoUI {
         );
         servicoMap.forEach((id, servico) -> {
             System.out.println(
+                String.format("%-20s", "|" + id) + "\t" +
                 String.format("%-20s", "|" + servico.getNome()) + "\t" +
                 String.format("%-20s", "|" + servico.getTipo()) + "\t" +
                 String.format("%-20s", "|" + servico.getPreco())

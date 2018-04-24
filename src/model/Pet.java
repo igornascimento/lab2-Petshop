@@ -15,7 +15,10 @@ public class Pet {
 	private Cliente cliente;
         private Map<Integer, Servico> servicoMap;
 	
-	public Pet() {
+	public Pet(String nome, int tipo) {
+            this.id = ++this.id;
+            this.nome = nome;
+            this.tipo = tipo;
 	}
 	
 	public Pet(String nome, int tipo, Cliente cliente) {

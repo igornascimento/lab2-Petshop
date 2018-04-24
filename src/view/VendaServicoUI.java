@@ -33,6 +33,19 @@ public class VendaServicoUI {
         this.servicoMap = servicoMap;
         this.clienteUI = new ClienteUI(this.clienteMap);
         this.servicoUI = new ServicoUI(this.servicoMap);
+        
+        // populando itens para teste
+        this.clienteMap.put("12341234", new Cliente("12341234", "José da Silva", "56785678"));
+        Map<Integer, Pet> pets1 = new HashMap<>();
+        pets1.put(1, new Pet("Oliver", 1));
+        pets1.put(2, new Pet("Maneco", 2));
+        this.clienteMap.get("12341234").setPets(pets1);
+        this.clienteMap.put("23452345", new Cliente("23452345", "Maria Almeida", "85687589"));
+        Map<Integer, Pet> pets2 = new HashMap<>();
+        pets2.put(1, new Pet("Nica", 2));
+        this.clienteMap.get("23452345").setPets(pets2);
+        this.servicoMap.put(1, new Servico("Banho", "banho", 50.00));
+        this.servicoMap.put(2, new Servico("Tosa", "tosa", 70.00));
     }
     
     public void showMenu() {
@@ -41,8 +54,7 @@ public class VendaServicoUI {
         do {
             System.out.println("##### VENDAS #####");
             System.out.println("1- Registrar venda;");
-            System.out.println("2- Listar;");
-            System.out.println("3- Remover;");
+            System.out.println("2- Exibir registro de vendas;");
             System.out.println("0- Sair;");
             
             opcao = Console.scanInt("Informe a opção para prosseguir:");
@@ -66,29 +78,30 @@ public class VendaServicoUI {
         } else {
             
             Cliente cliente = selecionarCliente();
-            if (cliente.getPets().size() == 0) {
-                System.out.println("Não há PETs cadastrados. Cadastre um ou mais pets para prosseguir.");
-            } else {
-                // apresenta a lista de pets
-                listarPets(cliente);
-                int petId = Console.scanInt("Informe o ID do pet:");
-                
-                int servicoId = 0;
-                Map<Integer, Servico> servicosSelecionadosMap = new HashMap<>();
-                do {
-                    // apresenta a lista de servicos
-                    servicoUI.listar();
-                    servicoId = Console.scanInt("Informe o ID do serviço desejado ou 0 para sair:");
-                    servicosSelecionadosMap.put(servicoId, servicoMap.get(servicoId));
-                } while(servicoId != 0);
-                
-                VendaServico venda = new VendaServico(
-                    LocalDateTime.now(),
-                    cliente,
-                    cliente.getPets().get(petId),
-                    servicosSelecionadosMap
-                );
-                this.vendaMap.put(venda.getId(), venda);
+            if (cliente != null) {
+                if (cliente.getPets().size() == 0) {
+                    System.out.println("Não há PETs cadastrados. Cadastre um ou mais pets para prosseguir.");
+                } else {
+                    // apresenta a lista de pets
+                    listarPets(cliente);
+                    int petId = Console.scanInt("Informe o ID do pet:");
+
+                    int servicoId = 0;
+                    Map<Integer, Servico> servicosSelecionadosMap = new HashMap<>();
+                    do {
+                        // apresenta a lista de servicos
+                        servicoUI.listar();
+                        servicoId = Console.scanInt("Informe o ID do serviço desejado ou 0 para sair:");
+                        servicosSelecionadosMap.put(servicoId, servicoMap.get(servicoId));
+                        VendaServico venda = new VendaServico(
+                            LocalDateTime.now(),
+                            cliente,
+                            cliente.getPets().get(petId),
+                            servicosSelecionadosMap
+                        );
+                        this.vendaMap.put(venda.getId(), venda);
+                    } while(servicoId != 0);
+                }
             }
         }
     }
@@ -117,11 +130,9 @@ public class VendaServicoUI {
         if (vendaMap.isEmpty()) {
             System.out.println("Nenhuma venda cadastrada.");
         } else {
-            double total = 0;
             System.out.println(
                 String.format("%-20s", "|ID") + "\t" +
                 String.format("%-20s", "|CLIENTE") + "\t" +
-                String.format("%-20s", "|PET") + "\t" +
                 String.format("%-20s", "|NOME PET") + "\t" +
                 String.format("%-20s", "|TIPO PET") + "\t" +
                 String.format("%-20s", "|SERVIÇO") + "\t" +
@@ -138,9 +149,10 @@ public class VendaServicoUI {
 //                    //total =+ servico.getPreco();
 //                });
 //            });
-            for (int i=0; i<vendaMap.size(); i++) {
+            double total = 0;
+            for (int i=1; i<=vendaMap.size(); i++) {
                 VendaServico venda = vendaMap.get(i);
-                for (int j=0; j<vendaMap.get(i).getServicoMap().size(); j++) {
+                for (int j=1; j<=venda.getServicoMap().size(); j++) {
                     System.out.println(
                         String.format("%-20s", "|" + id) + "\t" +
                         String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
@@ -149,7 +161,7 @@ public class VendaServicoUI {
                         //servico
                         String.format("%-20s", "|" + venda.getServicoMap().get(j).getNome()) + "\t" +
                         String.format("%-20s", "|" + venda.getServicoMap().get(j).getPreco()) );
-                    total =+ venda.getServicoMap().get(j).getPreco();
+                    total += venda.getServicoMap().get(j).getPreco();
                 }
             }
             System.out.println("Total dos serviços: " + total);
