@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Map;
+
 /**
  *
  * @author Igor Nascimento <igornascimento@gmail.com>
@@ -9,6 +11,7 @@ public class Cliente {
     private String rg;
     private String nome;
     private String telefone;
+    private Map<Integer, Pet> pets;
 
     public Cliente() {
     }
@@ -41,6 +44,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
             this.telefone = telefone;
+    }
+    
+    public Map<Integer, Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(Map<Integer, Pet> pets) {
+        this.pets = pets;
     }
     
 }
