@@ -47,11 +47,11 @@ public class MainUI {
                     break;
                 
                 case 3:
-                    //new ServicoUI().showMenu(servicoMap);
+                    new ServicoUI(servicoMap).showMenu();
                     break;
                 
                 case 4:
-                    //new VendaUI().showMenu(vendaMap);
+                    new VendaServicoUI(vendaMap, clienteMap, servicoMap).showMenu();
                     break;
                     
                 default:

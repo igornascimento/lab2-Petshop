@@ -81,16 +81,14 @@ public class PetUI {
             String.format("%-20s", "|ID") + "\t" +
             String.format("%-20s", "|Nome") + "\t" +
             String.format("%-20s", "|Tipo") + "\t" +
-            String.format("%-20s", "|Proprietário")
-        );
-        
+            String.format("%-20s", "|Proprietário") );
+
         petMap.forEach((id, pet) -> {
             System.out.println(
                 String.format("%-20s", "|" + id) + "\t" +
                 String.format("%-20s", "|" + pet.getNome()) + "\t" +
                 String.format("%-20s", "|" + (pet.getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
-                String.format("%-20s", "|" + pet.getCliente().getNome())
-            );
+                String.format("%-20s", "|" + pet.getCliente().getNome()) );
         });
     }
     

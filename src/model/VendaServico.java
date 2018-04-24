@@ -12,8 +12,7 @@ import java.util.Random;
 */
 public class VendaServico {
 
-	private static Random vendaServicoIdGenerator = new Random();
-	private int id;
+	private static int id = 0;
 	private LocalDateTime datahora;
 	private Cliente cliente;
 	private Map<Pet, List<Servico>> mapPetServicos;
@@ -22,7 +21,7 @@ public class VendaServico {
 	}
 
 	public VendaServico(LocalDateTime datahora, Cliente cliente, Pet pet, List<Servico> listaServicos) {
-		this.id = vendaServicoIdGenerator.nextInt(100);
+		this.id = ++this.id;
 		this.datahora = datahora;
 		this.cliente = cliente;
 		this.mapPetServicos = new HashMap();

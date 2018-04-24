@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -12,6 +13,7 @@ public class Pet {
 	private String nome;
 	private int tipo;
 	private Cliente cliente;
+        private Map<Integer, Servico> servicoMap;
 	
 	public Pet() {
 	}
@@ -50,5 +52,13 @@ public class Pet {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+        public Map<Integer, Servico> getServicos() {
+            return servicoMap;
+        }
+
+        public void setServicos(Map<Integer, Servico> servicoMap) {
+            this.servicoMap = servicoMap;
+        }
 	
 }

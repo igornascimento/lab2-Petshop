@@ -8,8 +8,7 @@ import java.util.Random;
 */
 public class Servico {
 
-	private static Random servicoIdGenerator = new Random();
-	private int id;
+	private static int id;
 	private String nome;
 	private String tipo; // clinico|estetico
 	private double preco;
@@ -18,7 +17,7 @@ public class Servico {
 	}
 	
 	public Servico(String nome, String tipo, double preco) {
-		this.id = servicoIdGenerator.nextInt(100);
+		this.id = ++this.id;
 		this.nome = nome;
 		this.tipo = tipo;
 		this.preco = preco;
