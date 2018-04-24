@@ -8,8 +8,7 @@ import java.util.Random;
 */
 public class Pet {
 
-	private static Random petIdGenerator = new Random();
-	private int id;
+	private static int id = 0;
 	private String nome;
 	private int tipo;
 	private Cliente cliente;
@@ -18,7 +17,7 @@ public class Pet {
 	}
 	
 	public Pet(String nome, int tipo, Cliente cliente) {
-		this.id = petIdGenerator.nextInt(100);
+		this.id = ++this.id;
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cliente = cliente;

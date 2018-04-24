@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.util.HashMap;
 import java.util.Map;
 import model.Cliente;
 import model.Pet;
@@ -16,7 +17,6 @@ import util.Console;
  */
 public class PetUI {
 
-    private static int id = 0;
     private Map<Integer, Pet> petMap;
     private Map<Integer, Cliente> clienteMap;
     private ClienteUI clienteUI;
@@ -24,6 +24,14 @@ public class PetUI {
     public PetUI(Map petMap, Map clienteMap) {
         this.petMap = petMap;
         this.clienteMap = clienteMap;
+        this.clienteUI = new ClienteUI(clienteMap);
+    }
+    
+    /**
+     * Para uso em servicoUI
+     */
+    public PetUI(Map petMap) {
+        this.petMap = petMap;
         this.clienteUI = new ClienteUI(clienteMap);
     }
     
@@ -55,7 +63,8 @@ public class PetUI {
                 Console.scanString("Nome do pet:"),
                 Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
                 cliente);
-            petMap.put(++this.id, pet);
+            petMap.put(pet.getId(), pet);
+            cliente.getPets().put(pet.getId(), pet);
             System.out.println("\nPet cadastrado com sucesso!");
         }
     }
