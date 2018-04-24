@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 import model.Cliente;
 import model.Pet;
@@ -47,8 +49,7 @@ public class VendaServicoUI {
             
             switch (opcao) {
                 case 1:  registrar(); break;
-//                case 2:  listar(); break;
-//                case 3:  remover(); break;
+                case 2:  verRegistroVendas(); break;
                 default: System.out.println("Opção inválida."); break;
             }
         } while(opcao != 0);
@@ -70,16 +71,26 @@ public class VendaServicoUI {
             } else {
                 // apresenta a lista de pets
                 listarPets(cliente);
-                // apresenta a lista de servicos
-                servicoUI.listar();
                 int petId = Console.scanInt("Informe o ID do pet:");
-
-                int servicoId = Console.scanInt("Informe o ID do serviço:");
-                // adiciona o servico selecionado a lista
-                cliente.getPets().get(petId).getServicos().put(servicoId, servicoMap.get(servicoId));
+                
+                int servicoId = 0;
+                Map<Integer, Servico> servicosSelecionadosMap = new HashMap<>();
+                do {
+                    // apresenta a lista de servicos
+                    servicoUI.listar();
+                    servicoId = Console.scanInt("Informe o ID do serviço desejado ou 0 para sair:");
+                    servicosSelecionadosMap.put(servicoId, servicoMap.get(servicoId));
+                } while(servicoId != 0);
+                
+                VendaServico venda = new VendaServico(
+                    LocalDateTime.now(),
+                    cliente,
+                    cliente.getPets().get(petId),
+                    servicosSelecionadosMap
+                );
+                this.vendaMap.put(venda.getId(), venda);
             }
         }
-        
     }
     
     private Cliente selecionarCliente() {
@@ -100,5 +111,48 @@ public class VendaServicoUI {
                 String.format("%-20s", "|" + pet.getNome()) + "\t" +
                 String.format("%-20s", "|" + (pet.getTipo() == 1 ? "gato" : "cachorro")) );
         });
+    }
+    
+    private void verRegistroVendas() {
+        if (vendaMap.isEmpty()) {
+            System.out.println("Nenhuma venda cadastrada.");
+        } else {
+            double total = 0;
+            System.out.println(
+                String.format("%-20s", "|ID") + "\t" +
+                String.format("%-20s", "|CLIENTE") + "\t" +
+                String.format("%-20s", "|PET") + "\t" +
+                String.format("%-20s", "|NOME PET") + "\t" +
+                String.format("%-20s", "|TIPO PET") + "\t" +
+                String.format("%-20s", "|SERVIÇO") + "\t" +
+                String.format("%-20s", "|VALOR") );
+//            vendaMap.forEach((id, venda) -> {
+//                venda.getServicoMap().forEach((servicoId, servico) -> {
+//                    System.out.println(
+//                        String.format("%-20s", "|" + id) + "\t" +
+//                        String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
+//                        String.format("%-20s", "|" + venda.getPet().getNome()) + "\t" +
+//                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
+//                        String.format("%-20s", "|" + servico.getNome()) + "\t" +
+//                        String.format("%-20s", "|" + servico.getPreco()) );
+//                    //total =+ servico.getPreco();
+//                });
+//            });
+            for (int i=0; i<vendaMap.size(); i++) {
+                VendaServico venda = vendaMap.get(i);
+                for (int j=0; j<vendaMap.get(i).getServicoMap().size(); j++) {
+                    System.out.println(
+                        String.format("%-20s", "|" + id) + "\t" +
+                        String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
+                        String.format("%-20s", "|" + venda.getPet().getNome()) + "\t" +
+                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
+                        //servico
+                        String.format("%-20s", "|" + venda.getServicoMap().get(j).getNome()) + "\t" +
+                        String.format("%-20s", "|" + venda.getServicoMap().get(j).getPreco()) );
+                    total =+ venda.getServicoMap().get(j).getPreco();
+                }
+            }
+            System.out.println("Total dos serviços: " + total);
+        }
     }
 }

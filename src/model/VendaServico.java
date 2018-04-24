@@ -2,9 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
 *
@@ -15,17 +13,18 @@ public class VendaServico {
 	private static int id = 0;
 	private LocalDateTime datahora;
 	private Cliente cliente;
-	private Map<Pet, List<Servico>> mapPetServicos;
+	private Pet pet;
+	private Map<Integer, Servico> servicoMap;
 	
 	public VendaServico() {
 	}
 
-	public VendaServico(LocalDateTime datahora, Cliente cliente, Pet pet, List<Servico> listaServicos) {
+	public VendaServico(LocalDateTime datahora, Cliente cliente, Pet pet, Map<Integer, Servico> servicoMap) {
 		this.id = ++this.id;
 		this.datahora = datahora;
 		this.cliente = cliente;
-		this.mapPetServicos = new HashMap();
-		this.mapPetServicos.put(pet, listaServicos);
+		this.pet = pet;
+		this.servicoMap = servicoMap;
 	}
 	
 	public int getId() {
@@ -47,13 +46,21 @@ public class VendaServico {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
-	public Map<Pet, List<Servico>> getMapPetServicos() {
-		return mapPetServicos;
+        
+        public Pet getPet() {
+		return pet;
 	}
 
-	public void setListaPets(Pet pet, List<Servico> listaServicos) {
-		this.mapPetServicos.put(pet, listaServicos);
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
+
+        public Map<Integer, Servico> getServicoMap() {
+            return servicoMap;
+        }
+
+        public void setServicoMap(Map<Integer, Servico> servicoMap) {
+            this.servicoMap = servicoMap;
+        }
 	
 }
