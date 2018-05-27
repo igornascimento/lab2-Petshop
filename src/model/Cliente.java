@@ -56,4 +56,13 @@ public class Cliente {
         this.pets = pets;
     }
     
+    public Pet buscarPetPorNome(String nomePet) {
+        for (int i=0; i < this.pets.size(); i++) {
+            if (this.pets.get(i).getNome() == nomePet) {
+                return this.pets.get(i);
+            }
+        }
+        return null;
+    }
+    
 }

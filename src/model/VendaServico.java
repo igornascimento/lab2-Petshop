@@ -15,6 +15,7 @@ public class VendaServico {
 	private Cliente cliente;
 	private Pet pet;
 	private Map<Integer, Servico> servicoMap;
+        private double total;
 	
 	public VendaServico() {
 	}
@@ -61,6 +62,14 @@ public class VendaServico {
 
         public void setServicoMap(Map<Integer, Servico> servicoMap) {
             this.servicoMap = servicoMap;
+        }
+        
+        public void setTotal(double val) {
+            this.total = val;
+        }
+        
+        public double getTotal() {
+            return total;
         }
 	
 }

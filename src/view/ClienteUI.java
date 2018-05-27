@@ -45,12 +45,16 @@ public class ClienteUI {
 
     public void cadastrar() {
         String doc = Console.scanString("RG:");
-        Cliente cliente = new Cliente(
-            doc,
-            Console.scanString("Nome:"),
-            Console.scanString("Telefone:")
-        );
-        clienteMap.put(doc, cliente);
+        if (this.buscarPorRg(doc) != null) {
+            System.out.println("Cliente já existente!");
+        } else {
+            Cliente cliente = new Cliente(
+                doc,
+                Console.scanString("Nome:"),
+                Console.scanString("Telefone:")
+            );
+            clienteMap.put(doc, cliente);
+        }
     }
     
     public void listar() {

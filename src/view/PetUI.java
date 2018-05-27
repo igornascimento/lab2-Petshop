@@ -59,13 +59,18 @@ public class PetUI {
     public void cadastrar() {
         Cliente cliente = selecionarCliente();
         if (cliente != null) {
-            Pet pet = new Pet(
-                Console.scanString("Nome do pet:"),
-                Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
-                cliente);
-            petMap.put(pet.getId(), pet);
-            cliente.getPets().put(pet.getId(), pet);
-            System.out.println("\nPet cadastrado com sucesso!");
+            String nomePet = Console.scanString("Informe o nome do pet:");
+            if (cliente.buscarPetPorNome(nomePet) != null) {
+                System.out.println("Pet já cadastrado para este cliente!");
+            } else {
+                Pet pet = new Pet(
+                    Console.scanString("Nome do pet:"),
+                    Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
+                    cliente);
+                petMap.put(pet.getId(), pet);
+                cliente.getPets().put(pet.getId(), pet);
+                System.out.println("\nPet cadastrado com sucesso!");
+            }
         }
     }
     
