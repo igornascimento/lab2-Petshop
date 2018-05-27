@@ -6,6 +6,7 @@
 package view;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import model.Cliente;
@@ -55,6 +56,7 @@ public class VendaServicoUI {
             System.out.println("##### VENDAS #####");
             System.out.println("1- Registrar venda;");
             System.out.println("2- Exibir registro de vendas;");
+            System.out.println("3- Remover venda;");
             System.out.println("0- Sair;");
             
             opcao = Console.scanInt("Informe a opção para prosseguir:");
@@ -62,6 +64,7 @@ public class VendaServicoUI {
             switch (opcao) {
                 case 1:  registrar(); break;
                 case 2:  verRegistroVendas(); break;
+                case 3:  remover(); break;
                 default: System.out.println("Opção inválida."); break;
             }
         } while(opcao != 0);
@@ -130,41 +133,60 @@ public class VendaServicoUI {
         if (vendaMap.isEmpty()) {
             System.out.println("Nenhuma venda cadastrada.");
         } else {
+            double total = 0;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            
             System.out.println(
                 String.format("%-20s", "|ID") + "\t" +
                 String.format("%-20s", "|CLIENTE") + "\t" +
                 String.format("%-20s", "|NOME PET") + "\t" +
                 String.format("%-20s", "|TIPO PET") + "\t" +
                 String.format("%-20s", "|SERVIÇO") + "\t" +
+                String.format("%-20s", "|DATA") + "\t" +
                 String.format("%-20s", "|VALOR") );
-//            vendaMap.forEach((id, venda) -> {
-//                venda.getServicoMap().forEach((servicoId, servico) -> {
-//                    System.out.println(
-//                        String.format("%-20s", "|" + id) + "\t" +
-//                        String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
-//                        String.format("%-20s", "|" + venda.getPet().getNome()) + "\t" +
-//                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
-//                        String.format("%-20s", "|" + servico.getNome()) + "\t" +
-//                        String.format("%-20s", "|" + servico.getPreco()) );
-//                    //total =+ servico.getPreco();
-//                });
-//            });
-            double total = 0;
-            for (int i=1; i<=vendaMap.size(); i++) {
-                VendaServico venda = vendaMap.get(i);
-                for (int j=1; j<=venda.getServicoMap().size(); j++) {
+            
+            vendaMap.forEach((id, venda) -> {
+                venda.getServicoMap().forEach((servicoId, servico) -> {
                     System.out.println(
                         String.format("%-20s", "|" + id) + "\t" +
                         String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
                         String.format("%-20s", "|" + venda.getPet().getNome()) + "\t" +
-                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
-                        //servico
-                        String.format("%-20s", "|" + venda.getServicoMap().get(j).getNome()) + "\t" +
-                        String.format("%-20s", "|" + venda.getServicoMap().get(j).getPreco()) );
-                    total += venda.getServicoMap().get(j).getPreco();
-                }
-            }
-            System.out.println("Total dos serviços: " + total);
+                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "Gato" : "Cachorro")) + "\t" +
+                        String.format("%-20s", "|" + (servico != null ? servico.getNome() : "")) + "\t" +
+                        String.format("%-20s", "|" + venda.getDatahora().format(formatter)) + "\t" +
+                        String.format("%-20s", "|" + (servico != null ? servico.getPreco() : "")) );
+                    //total =+ servico.getPreco();
+                });
+            });
+
+//            for (int i=1; i<=vendaMap.size(); i++) {
+//                VendaServico venda = vendaMap.get(i);
+//                for (int j=1; j<=venda.getServicoMap().size(); j++) {
+//                    System.out.println(
+//                        String.format("%-20s", "|" + venda.getId()) + "\t" +
+//                        String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
+//                        String.format("%-20s", "|" + venda.getPet().getNome()) + "\t" +
+//                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
+//                        //servico
+//                        String.format("%-20s", "|" + (venda.getServicoMap().get(j) == null ? "" : venda.getServicoMap().get(j).getNome())) + "\t" +
+//                        String.format("%-20s", "|" + (venda.getServicoMap().get(j) == null ? "" : venda.getServicoMap().get(j).getPreco())) );
+//                    if (venda.getServicoMap().get(j) != null) {
+//                        total += venda.getServicoMap().get(j).getPreco();
+//                    }
+//                }
+//            }
+//            System.out.println("Total dos serviços: " + total);
+        }
+    }
+    
+    private void remover() {
+        if (vendaMap.isEmpty()) {
+            System.out.println("Nenhuma venda cadastrada.");
+        } else {
+            int id = Console.scanInt("Informe o ID da venda para remover:");
+            vendaMap.remove(id);
+            verRegistroVendas();
+            System.out.println("Registro removido com sucesso.");
         }
     }
 }
