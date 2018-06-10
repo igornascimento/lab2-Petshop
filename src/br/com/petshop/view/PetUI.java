@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package br.com.petshop.view;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.Cliente;
-import model.Pet;
-import util.Console;
+import br.com.petshop.dominio.Cliente;
+import br.com.petshop.dominio.Pet;
+import br.com.petshop.util.Console;
 
 /**
  *

@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package br.com.petshop.view;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import model.Cliente;
-import model.Pet;
-import model.Servico;
-import model.VendaServico;
-import util.Console;
+import br.com.petshop.dominio.Cliente;
+import br.com.petshop.dominio.Pet;
+import br.com.petshop.dominio.Servico;
+import br.com.petshop.dominio.VendaServico;
+import br.com.petshop.util.Console;
 
 /**
  *
@@ -112,7 +112,7 @@ public class VendaServicoUI {
     private Cliente selecionarCliente() {
         clienteUI.listar();
         String doc = Console.scanString("Para prosseguir, informe o RG do proprietário do pet (ou 0 para voltar):");
-        model.Cliente cliente = clienteUI.buscarPorRg(doc);
+        br.com.petshop.dominio.Cliente cliente = clienteUI.buscarPorRg(doc);
         return cliente;
     }
     

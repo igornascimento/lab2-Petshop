@@ -1,4 +1,4 @@
-package model;
+package br.com.petshop.dominio;
 
 import java.util.HashMap;
 import java.util.Map;

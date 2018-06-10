@@ -1,4 +1,4 @@
-package util;
+package br.com.petshop.util;
 
 import java.util.Scanner;
 

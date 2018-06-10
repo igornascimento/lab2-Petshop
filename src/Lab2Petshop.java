@@ -1,6 +1,6 @@
 
 
-import view.MainUI;
+import br.com.petshop.view.MainUI;
 
 /**
  *
