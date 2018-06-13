@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public class Cliente {
 
+    private int id;
     private String rg;
     private String nome;
     private String telefone;
@@ -17,11 +18,20 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String rg, String nome, String telefone) {
+    public Cliente(int id, String rg, String nome, String telefone) {
+            this.id = id;
             this.rg = rg;
             this.nome = nome;
             this.telefone = telefone;
             this.pets = new HashMap<>();
+    }
+    
+    public int getId() {
+            return id;
+    }
+
+    public void setId(int id) {
+            this.id = id;
     }
 
     public String getRg() {

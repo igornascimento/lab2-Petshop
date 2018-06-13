@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author Igor Nascimento <igornascimento@gmail.com>
+ * @param <T>
  */
 public interface Dao<T> {
     

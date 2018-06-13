@@ -20,7 +20,7 @@ public class Pet {
             this.tipo = tipo;
 	}
 	
-	public Pet(String nome, int tipo, Cliente cliente) {
+	public Pet(int id, String nome, int tipo, Cliente cliente) {
 		this.id = ++this.id;
 		this.nome = nome;
 		this.tipo = tipo;
@@ -30,6 +30,10 @@ public class Pet {
 	public int getId() {
 		return id;
 	}
+        
+        public void setId(int id) {
+                this.id = id;
+        }
 
 	public String getNome() {
 		return nome;
