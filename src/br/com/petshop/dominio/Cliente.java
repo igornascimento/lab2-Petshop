@@ -1,7 +1,7 @@
 package br.com.petshop.dominio;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +13,7 @@ public class Cliente {
     private String rg;
     private String nome;
     private String telefone;
-    private Map<Integer, Pet> pets;
+    private List<Pet> pets;
 
     public Cliente() {
     }
@@ -23,7 +23,7 @@ public class Cliente {
             this.rg = rg;
             this.nome = nome;
             this.telefone = telefone;
-            this.pets = new HashMap<>();
+            this.pets = new ArrayList<>();
     }
     
     public int getId() {
@@ -58,21 +58,12 @@ public class Cliente {
             this.telefone = telefone;
     }
     
-    public Map<Integer, Pet> getPets() {
+    public List<Pet> getPets() {
         return pets;
     }
 
-    public void setPets(Map<Integer, Pet> pets) {
+    public void setPets(List<Pet> pets) {
         this.pets = pets;
-    }
-    
-    public Pet buscarPetPorNome(String nomePet) {
-        for (int i=0; i < this.pets.size(); i++) {
-            if (this.pets.get(i).getNome() == nomePet) {
-                return this.pets.get(i);
-            }
-        }
-        return null;
     }
     
 }

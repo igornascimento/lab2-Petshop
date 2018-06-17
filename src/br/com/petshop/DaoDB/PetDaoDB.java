@@ -7,7 +7,6 @@ package br.com.petshop.DaoDB;
 
 import br.com.petshop.DB.BDException;
 import br.com.petshop.DB.DaoDB;
-import br.com.petshop.DaoDB.ClienteDaoDB;
 import br.com.petshop.dao.PetDao;
 import br.com.petshop.dominio.Cliente;
 import br.com.petshop.dominio.Pet;
@@ -21,8 +20,6 @@ import java.util.List;
  * @author Igor Nascimento <igornascimento@gmail.com>
  */
 public class PetDaoDB extends DaoDB<Pet> implements PetDao {
-
-    private ClienteDaoDB clienteDao = new ClienteDaoDB();
     
     @Override
     public void salvar(Pet pet) {
@@ -30,9 +27,9 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
         try {
             String sql = "INSERT INTO pet (nome, tipo, cliente) VALUES (?,?,?)";
             conectarObtendoId(sql);
-            comando.setString(2, pet.getNome());
-            comando.setInt(1, pet.getTipo());
-            comando.setInt(3, pet.getCliente().getId());
+            comando.setString(1, pet.getNome());
+            comando.setInt(2, pet.getTipo());
+            comando.setInt(3, pet.getCliente());
             comando.executeUpdate();
             ResultSet resultado = comando.getGeneratedKeys();
             if (resultado.next()) {
@@ -45,7 +42,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 throw new BDException("Nao gerou o id conforme esperado!");
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao salvar cliente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao salvar pet no Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -60,7 +57,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             comando.setInt(1, pet.getId());
             comando.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao deletar cliente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao deletar pet no Banco de Dados!");
             throw new RuntimeException(ex);
         } finally {
             fecharConexao();
@@ -74,7 +71,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             conectar(sql);
             comando.setString(1, pet.getNome());
             comando.setInt(2, pet.getTipo());
-            comando.setInt(3, pet.getCliente().getId());
+            comando.setInt(3, pet.getCliente());
             comando.setInt(4, pet.getId());
             comando.executeUpdate();
         } catch (SQLException ex) {
@@ -97,7 +94,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = clienteDao.buscarPorId( resultado.getInt("cliente") );
+                int cliente = resultado.getInt("cliente");
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);
             }
@@ -112,7 +109,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
 
     @Override
     public Pet buscarPorId(int idBusca) {
-        String sql = "SELECT * FROM paciente WHERE id = ?";
+        String sql = "SELECT * FROM pet WHERE id = ?";
 
         try {
             conectar(sql);
@@ -122,7 +119,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = clienteDao.buscarPorId( resultado.getInt("cliente") );
+                int cliente = resultado.getInt("cliente");
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 return pet;
             }
@@ -133,6 +130,32 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             fecharConexao();
         }
         return (null);
+    }
+    
+    @Override
+    public List<Pet> buscaPorCliente(Cliente clienteBusca) {
+        List<Pet> listaPets = new ArrayList();
+        String sql = "SELECT * FROM pet WHERE cliente = ?";
+
+        try {
+            conectar(sql);
+            comando.setInt(1, clienteBusca.getId());
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                int tipo = resultado.getInt("tipo");
+                int cliente = resultado.getInt("cliente");
+                Pet pet = new Pet(id, nome, tipo, cliente);
+                listaPets.add(pet);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar o paciente pelo id do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+        return listaPets;
     }
 
     @Override
@@ -149,7 +172,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = clienteDao.buscarPorId( resultado.getInt("cliente") );
+                int cliente = resultado.getInt("cliente");
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);
             }
@@ -160,6 +183,49 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             fecharConexao();
         }
         return (listaPets);
+    }
+    
+    @Override
+    public List<Pet> buscarPorNomeParaCliente(Cliente clienteBusca, String nomeBusca) {
+        List<Pet> listaPets = new ArrayList<>();
+        String sql = "SELECT * FROM pet WHERE nome LIKE ? and cliente = ?";
+
+        try {
+            conectar(sql);
+            comando.setString(1, "%" + nomeBusca + "%");
+            comando.setInt(2, clienteBusca.getId());
+            ResultSet resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                int tipo = resultado.getInt("tipo");
+                int cliente = resultado.getInt("cliente");
+                Pet pet = new Pet(id, nome, tipo, cliente);
+                listaPets.add(pet);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar os pacientes pelo nome do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+        return (listaPets);
+    }
+    
+    @Override
+    public void deletarPorCliente(Cliente cliente) {
+        try {
+            String sql = "DELETE FROM pet WHERE cliente = ?";
+            conectar(sql);
+            comando.setInt(1, cliente.getId());
+            comando.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao deletar pet no Banco de Dados!");
+            throw new RuntimeException(ex);
+        } finally {
+            fecharConexao();
+        }
     }
     
 }

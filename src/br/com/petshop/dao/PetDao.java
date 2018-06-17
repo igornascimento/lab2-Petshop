@@ -17,4 +17,10 @@ public interface PetDao extends Dao<Pet> {
     
     public List<Pet> buscarPorNome(String nome);
     
+    public List<Pet> buscaPorCliente(Cliente cliente);
+    
+    public List<Pet> buscarPorNomeParaCliente(Cliente cliente, String nome);
+    
+    public void deletarPorCliente(Cliente cliente);
+    
 }

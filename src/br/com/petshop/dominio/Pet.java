@@ -12,19 +12,13 @@ public class Pet {
 	private static int id = 0;
 	private String nome;
 	private int tipo;
-	private Cliente cliente;
+        private int cliente;
 	
-	public Pet(String nome, int tipo) {
+	public Pet(int id, String nome, int tipo, int cliente) {
             this.id = ++this.id;
             this.nome = nome;
             this.tipo = tipo;
-	}
-	
-	public Pet(int id, String nome, int tipo, Cliente cliente) {
-		this.id = ++this.id;
-		this.nome = nome;
-		this.tipo = tipo;
-		this.cliente = cliente;
+            this.cliente = cliente;
 	}
 
 	public int getId() {
@@ -50,12 +44,12 @@ public class Pet {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-
-	public Cliente getCliente() {
+        
+        public int getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(int cliente) {
 		this.cliente = cliente;
 	}
 	

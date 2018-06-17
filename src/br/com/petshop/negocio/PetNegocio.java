@@ -6,6 +6,7 @@
 package br.com.petshop.negocio;
 
 import br.com.petshop.DaoDB.PetDaoDB;
+import br.com.petshop.dominio.Cliente;
 import br.com.petshop.dominio.Pet;
 import java.util.List;
 
@@ -52,12 +53,10 @@ public class PetNegocio {
         return(petDao.buscarPorNome(nome));
     }
     
-    public boolean petExiste(String nome, String nomeProprietario) {
-        List<Pet> petList = petDao.buscarPorNome(nome);
-        for (Pet p : petList) {
-            if (p != null && p.getCliente().getNome().equals(nomeProprietario)) {
-                return true;
-            }
+    public boolean petExisteParaCliente(Cliente cliente, String nomePet) {
+        List<Pet> petList = petDao.buscarPorNomeParaCliente(cliente, nomePet);
+        if (petList.size() > 0) {
+            return true;
         }
         return false;
     }
