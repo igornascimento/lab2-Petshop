@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.petshop.Dao;
+package br.com.petshop.dao;
 
 import br.com.petshop.dominio.Cliente;
 import java.util.List;

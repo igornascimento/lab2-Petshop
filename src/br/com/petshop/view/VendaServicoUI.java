@@ -36,12 +36,12 @@ public class VendaServicoUI {
         this.servicoUI = new ServicoUI(this.servicoMap);
         
         // populando itens para teste
-        this.clienteMap.put("12341234", new Cliente("12341234", "José da Silva", "56785678"));
+        //this.clienteMap.put("12341234", new Cliente("12341234", "José da Silva", "56785678"));
         Map<Integer, Pet> pets1 = new HashMap<>();
         pets1.put(1, new Pet("Oliver", 1));
         pets1.put(2, new Pet("Maneco", 2));
         this.clienteMap.get("12341234").setPets(pets1);
-        this.clienteMap.put("23452345", new Cliente("23452345", "Maria Almeida", "85687589"));
+        //this.clienteMap.put("23452345", new Cliente("23452345", "Maria Almeida", "85687589"));
         Map<Integer, Pet> pets2 = new HashMap<>();
         pets2.put(1, new Pet("Nica", 2));
         this.clienteMap.get("23452345").setPets(pets2);

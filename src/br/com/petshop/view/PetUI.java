@@ -63,12 +63,12 @@ public class PetUI {
             if (cliente.buscarPetPorNome(nomePet) != null) {
                 System.out.println("Pet já cadastrado para este cliente!");
             } else {
-                Pet pet = new Pet(
-                    Console.scanString("Nome do pet:"),
-                    Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
-                    cliente);
-                petMap.put(pet.getId(), pet);
-                cliente.getPets().put(pet.getId(), pet);
+            //    Pet pet = new Pet(
+            //        Console.scanString("Nome do pet:"),
+            //        Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
+            //        cliente);
+            //    petMap.put(pet.getId(), pet);
+            //    cliente.getPets().put(pet.getId(), pet);
                 System.out.println("\nPet cadastrado com sucesso!");
             }
         }

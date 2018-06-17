@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class PetDaoDB extends DaoDB<Pet> implements PetDao {
 
+    private ClienteDaoDB clienteDao = new ClienteDaoDB();
+    
     @Override
     public void salvar(Pet pet) {
         int id = 0;
@@ -95,7 +97,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = ClienteDaoDB.buscarPorId( resultado.getInt("cliente") );
+                Cliente cliente = clienteDao.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);
             }
@@ -120,7 +122,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = ClienteDaoDB.buscarPorId( resultado.getInt("cliente") );
+                Cliente cliente = clienteDao.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 return pet;
             }
@@ -147,7 +149,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = ClienteDaoDB.buscarPorId( resultado.getInt("cliente") );
+                Cliente cliente = clienteDao.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);
             }

@@ -8,7 +8,7 @@ package br.com.petshop.DaoDB;
 import br.com.petshop.DB.BDException;
 import br.com.petshop.DB.DaoDB;
 import br.com.petshop.dominio.Cliente;
-import br.com.petshop.Dao.ClienteDao;
+import br.com.petshop.dao.ClienteDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
