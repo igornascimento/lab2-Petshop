@@ -14,8 +14,14 @@ public class Pet {
 	private int tipo;
         private int cliente;
 	
-	public Pet(int id, String nome, int tipo, int cliente) {
-            this.id = ++this.id;
+	public Pet(String nome, int tipo, int cliente) {
+            this.nome = nome;
+            this.tipo = tipo;
+            this.cliente = cliente;
+	}
+        
+        public Pet(int id, String nome, int tipo, int cliente) {
+            this.id = id;
             this.nome = nome;
             this.tipo = tipo;
             this.cliente = cliente;

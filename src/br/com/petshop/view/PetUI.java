@@ -5,11 +5,12 @@
  */
 package br.com.petshop.view;
 
-import java.util.HashMap;
-import java.util.Map;
+import br.com.petshop.DaoDB.ClienteDaoDB;
+import br.com.petshop.DaoDB.PetDaoDB;
 import br.com.petshop.dominio.Cliente;
 import br.com.petshop.dominio.Pet;
 import br.com.petshop.util.Console;
+import java.util.List;
 
 /**
  *
@@ -17,22 +18,21 @@ import br.com.petshop.util.Console;
  */
 public class PetUI {
 
-    private Map<Integer, Pet> petMap;
-    private Map<Integer, Cliente> clienteMap;
+    private List<Pet> petList;
+    private List<Cliente> clienteList;
     private ClienteUI clienteUI;
+    ClienteDaoDB clienteDao = new ClienteDaoDB();
+    PetDaoDB petDao = new PetDaoDB();
     
-    public PetUI(Map petMap, Map clienteMap) {
-        this.petMap = petMap;
-        this.clienteMap = clienteMap;
-        this.clienteUI = new ClienteUI(clienteMap);
+    public PetUI(List<Pet> petList, List<Cliente> clienteList) {
+        this.petList = petList;
+        this.clienteList = clienteList;
+        this.clienteUI = new ClienteUI(clienteList);
     }
     
-    /**
-     * Para uso em servicoUI
-     */
-    public PetUI(Map petMap) {
-        this.petMap = petMap;
-        this.clienteUI = new ClienteUI(clienteMap);
+
+    public PetUI(List<Pet> petList) {
+        this.petList = petList;
     }
     
     public void showMenu() {
@@ -57,28 +57,21 @@ public class PetUI {
     }
     
     public void cadastrar() {
-        Cliente cliente = selecionarCliente();
+        Cliente cliente = clienteDao.buscarPorRg(Console.scanString("Informe o RG do proprietário:"));
         if (cliente != null) {
             String nomePet = Console.scanString("Informe o nome do pet:");
-            if (cliente.buscarPetPorNome(nomePet) != null) {
+            if (petDao.buscarPorNomeParaCliente(cliente, nomePet).size() > 0) {
                 System.out.println("Pet já cadastrado para este cliente!");
             } else {
-            //    Pet pet = new Pet(
-            //        Console.scanString("Nome do pet:"),
-            //        Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
-            //        cliente);
-            //    petMap.put(pet.getId(), pet);
-            //    cliente.getPets().put(pet.getId(), pet);
+                Pet pet = new Pet(
+                        Console.scanString("Nome do pet:"),
+                        Console.scanInt("Tipo (1-gato; 2-cachorro):"),
+                        cliente.getId()
+                );
+                petDao.salvar(pet);
                 System.out.println("\nPet cadastrado com sucesso!");
             }
         }
-    }
-    
-    public Cliente selecionarCliente() {
-        clienteUI.listar();
-        String doc = Console.scanString("Para prosseguir, informe o RG do proprietário do pet (ou 0 para voltar):");
-        Cliente cliente = clienteUI.buscarPorRg(doc);
-        return cliente;
     }
     
     public void listar() {
@@ -88,19 +81,22 @@ public class PetUI {
             String.format("%-20s", "|Tipo") + "\t" +
             String.format("%-20s", "|Proprietário") );
 
-        petMap.forEach((id, pet) -> {
+        List<Pet> petList = petDao.listar();
+        for (Pet pet : petList) {
+            Cliente cliente = clienteDao.buscarPorId(pet.getCliente());
             System.out.println(
-                String.format("%-20s", "|" + id) + "\t" +
+                String.format("%-20s", "|" + pet.getId()) + "\t" +
                 String.format("%-20s", "|" + pet.getNome()) + "\t" +
                 String.format("%-20s", "|" + (pet.getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
-                String.format("%-20s", "|" + pet.getCliente().getNome()) );
-        });
+                String.format("%-20s", "|" + cliente.getNome()) );
+        }
     }
     
     public void remover() {
         listar();
         int id = Console.scanInt("Informe o ID do pet para remover:");
-        petMap.remove(id);
+        Pet pet = petDao.buscarPorId(id);
+        petDao.deletar(pet);
         System.out.println("Registro removido com sucesso!");
     }
     

@@ -5,13 +5,13 @@
  */
 package br.com.petshop.view;
 
-import java.util.HashMap;
-import java.util.Map;
 import br.com.petshop.dominio.Cliente;
 import br.com.petshop.dominio.Pet;
 import br.com.petshop.dominio.Servico;
 import br.com.petshop.dominio.VendaServico;
 import br.com.petshop.util.Console;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,10 +19,10 @@ import br.com.petshop.util.Console;
  */
 public class MainUI {
     
-    Map<Integer, Pet> petMap = new HashMap<>();
-    Map<String, Cliente> clienteMap = new HashMap<>();
-    Map<Integer, Servico> servicoMap = new HashMap<>();
-    Map<Integer, VendaServico> vendaMap = new HashMap<>();
+    List<Pet> petList = new ArrayList<>();
+    List<Cliente> clienteList = new ArrayList<>();
+    List<Servico> servicoList = new ArrayList<>();
+    List<VendaServico> vendaList = new ArrayList<>();
     
     public void executar() {
         int opcao = 0;
@@ -39,19 +39,19 @@ public class MainUI {
             
             switch (opcao) {
                 case 1:
-                    new PetUI(petMap, clienteMap).showMenu();
+                    new PetUI(petList, clienteList).showMenu();
                     break;
                     
                 case 2:
-                    new ClienteUI(clienteMap).showMenu();
+                    new ClienteUI(clienteList).showMenu();
                     break;
                 
                 case 3:
-                    new ServicoUI(servicoMap).showMenu();
+                    new ServicoUI(servicoList).showMenu();
                     break;
                 
                 case 4:
-                    new VendaServicoUI(vendaMap, clienteMap, servicoMap).showMenu();
+                    new VendaServicoUI(vendaList, clienteList, servicoList).showMenu();
                     break;
                     
                 default:

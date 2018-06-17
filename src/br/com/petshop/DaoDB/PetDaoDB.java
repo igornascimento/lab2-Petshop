@@ -85,7 +85,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
     @Override
     public List<Pet> listar() {
         List<Pet> listaPets = new ArrayList<>();
-        String sql = "SELECT * FROM pet";
+        String sql = "SELECT * FROM pet ORDER BY id, cliente";
 
         try {
             conectar(sql);

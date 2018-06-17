@@ -5,9 +5,10 @@
  */
 package br.com.petshop.view;
 
-import java.util.Map;
+import br.com.petshop.DaoDB.ClienteDaoDB;
 import br.com.petshop.dominio.Cliente;
 import br.com.petshop.util.Console;
+import java.util.List;
 
 /**
  *
@@ -15,10 +16,11 @@ import br.com.petshop.util.Console;
  */
 public class ClienteUI {
     
-    private Map<String, Cliente> clienteMap;
+    private List<Cliente> clienteList;
+    private ClienteDaoDB clienteDao = new ClienteDaoDB();
     
-    public ClienteUI(Map clienteMap) {
-        this.clienteMap = clienteMap;
+    public ClienteUI(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
     
     public void showMenu() {
@@ -44,16 +46,16 @@ public class ClienteUI {
     }
 
     public void cadastrar() {
-        String doc = Console.scanString("RG:");
-        if (this.buscarPorRg(doc) != null) {
-            System.out.println("Cliente já existente!");
+        System.out.println("Cadastrando um novo cliente:");
+        String doc = Console.scanString("Informe o RG:");
+        Cliente cliente = clienteDao.buscarPorRg(doc);
+        if (cliente != null) {
+            System.out.println("CPF já cadastrado.");
         } else {
-        //    Cliente cliente = new Cliente(
-        //        doc,
-        //        Console.scanString("Nome:"),
-        //        Console.scanString("Telefone:")
-        //    );
-        //    clienteMap.put(doc, cliente);
+            cliente.setRg( doc );
+            cliente.setNome( Console.scanString("Nome:") );
+            cliente.setTelefone( Console.scanString("Telefone:") );
+            clienteDao.salvar(cliente);
         }
     }
     
@@ -64,25 +66,18 @@ public class ClienteUI {
             String.format("%-20s", "|Telefone")
         );
         
-        clienteMap.forEach((doc, cliente) -> {
+        for (Cliente cliente : clienteList) {
             System.out.println(
                 String.format("%-20s", "|" + cliente.getRg()) + "\t" +
                 String.format("%-20s", "|" + cliente.getNome()) + "\t" +
                 String.format("%-20s", "|" + cliente.getTelefone())
             );
-        });
-    }
-    
-    public Cliente buscarPorRg(String doc) {
-        if (clienteMap.containsKey(doc)) {
-            return clienteMap.get(doc);
         }
-        return null;
     }
     
     public void remover() {
-        String doc = Console.scanString("Informe o RG:");
-        this.clienteMap.remove(doc);
+        String doc = Console.scanString("Informe o CPF para remover:");
+        clienteDao.deletar(clienteDao.buscarPorRg(doc));
     }
     
 }
