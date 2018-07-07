@@ -45,7 +45,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 throw new BDException("Nao gerou o id conforme esperado!");
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao salvar cliente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao salvar pet no Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -60,7 +60,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             comando.setInt(1, pet.getId());
             comando.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao deletar cliente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao deletar pet no Banco de Dados!");
             throw new RuntimeException(ex);
         } finally {
             fecharConexao();
@@ -78,7 +78,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             comando.setInt(4, pet.getId());
             comando.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao atualizar paciente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao atualizar pet no Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -102,7 +102,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 listaPets.add(pet);
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar os pacientes do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar os pets do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -112,7 +112,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
 
     @Override
     public Pet buscarPorId(int idBusca) {
-        String sql = "SELECT * FROM paciente WHERE id = ?";
+        String sql = "SELECT * FROM pet WHERE id = ?";
 
         try {
             conectar(sql);
@@ -127,7 +127,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 return pet;
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar o paciente pelo id do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar o pet pelo id do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -154,7 +154,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 listaPets.add(pet);
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar os pacientes pelo nome do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar os pets pelo nome do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();

@@ -66,7 +66,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
     @Override
     public void atualizar(Cliente cliente) {
         try {
-            String sql = "UPDATE paciente SET rg=?, nome=?, telefone=? WHERE id=?";
+            String sql = "UPDATE cliente SET rg=?, nome=?, telefone=? WHERE id=?";
             conectar(sql);
             comando.setString(1, cliente.getNome());
             comando.setString(2, cliente.getTelefone());
@@ -74,7 +74,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
             comando.setInt(4, cliente.getId());
             comando.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao atualizar paciente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao atualizar cliente no Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -85,7 +85,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
     public List<Cliente> listar() {
         List<Cliente> listaClientes = new ArrayList<>();
 
-        String sql = "SELECT * FROM paciente";
+        String sql = "SELECT * FROM cliente";
 
         try {
             conectar(sql);
@@ -99,7 +99,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
                 listaClientes.add(cliente);
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar os pacientes do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar os clientes do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -109,7 +109,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
 
     @Override
     public Cliente buscarPorId(int id) {
-        String sql = "SELECT * FROM paciente WHERE id = ?";
+        String sql = "SELECT * FROM cliente WHERE id = ?";
 
         try {
             conectar(sql);
@@ -123,7 +123,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
                 return cliente;
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar o paciente pelo id do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar o cliente pelo id do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -133,7 +133,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
     
     @Override
     public Cliente buscarPorRg(String rg) {
-        String sql = "SELECT * FROM paciente WHERE rg = ?";
+        String sql = "SELECT * FROM cliente WHERE rg = ?";
 
         try {
             conectar(sql);
@@ -148,7 +148,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
                 return cliente;
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar o paciente pelo rg do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar o cliente pelo rg do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -159,7 +159,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
     @Override
     public List<Cliente> buscarPorNome(String nomeBusca) {
         List<Cliente> listaClientes = new ArrayList<>();
-        String sql = "SELECT * FROM paciente WHERE nome LIKE ?";
+        String sql = "SELECT * FROM cliente WHERE nome LIKE ?";
 
         try {
             conectar(sql);
@@ -175,7 +175,7 @@ public class ClienteDaoDB extends DaoDB<Cliente> implements ClienteDao  {
                 listaClientes.add(pac);
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar os pacientes pelo nome do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar os clientes pelo nome do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
