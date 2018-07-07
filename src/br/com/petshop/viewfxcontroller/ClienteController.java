@@ -7,14 +7,11 @@ package br.com.petshop.viewfxcontroller;
 
 import br.com.petshop.dominio.Cliente;
 import br.com.petshop.negocio.ClienteNegocio;
-import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -29,18 +26,22 @@ public class ClienteController {
     private TextField txtClienteRG;
     @FXML
     private TextField txtClienteTelefone;
+    @FXML
+    private Text txtClienteFeedback;
     
-    
+//    public ClienteController(){
+//        clienteNegocio = new ClienteNegocio();
+//    }
     
     @FXML
-    private void cadastrar() {
+    private void cadastrar(ActionEvent event) {
+        clienteNegocio = new ClienteNegocio();
         try {
-            System.out.println("Chamando CADASTRAR...");
             clienteNegocio.salvar(
                     new Cliente(txtClienteNome.getText(),
                                 txtClienteRG.getText(),
                                 txtClienteTelefone.getText()));
-            System.out.println("Cadastrar finalizado.");
+            txtClienteFeedback.setText("Cliente cadastrado com sucesso!");
         } catch(Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("ERRO!");

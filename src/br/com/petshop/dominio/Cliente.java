@@ -30,7 +30,6 @@ public class Cliente {
             this.rg = rg;
             this.nome = nome;
             this.telefone = telefone;
-            this.pets = new HashMap<>();
     }
     
     public int getId() {

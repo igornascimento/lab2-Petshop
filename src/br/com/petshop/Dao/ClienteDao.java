@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.petshop.dao;
+package br.com.petshop.Dao;
 
 import br.com.petshop.dominio.Cliente;
-import br.com.petshop.dominio.Pet;
+import br.com.petshop.Dao.Dao;
 import java.util.List;
 
 /**
  *
  * @author 180503743
  */
-public interface PetDao extends Dao<Pet> {
+public interface ClienteDao extends Dao<Cliente> {
     
-    public List<Pet> buscarPorNome(String nome);
+    public Cliente buscarPorRg(String rg);
+    
+    public List<Cliente> buscarPorNome(String nome);
     
 }

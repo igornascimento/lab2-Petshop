@@ -6,17 +6,15 @@
 package br.com.petshop.Dao;
 
 import br.com.petshop.dominio.Cliente;
-import br.com.petshop.dao.Dao;
+import br.com.petshop.dominio.Pet;
 import java.util.List;
 
 /**
  *
  * @author 180503743
  */
-public interface ClienteDao extends Dao<Cliente> {
+public interface PetDao extends Dao<Pet> {
     
-    public Cliente buscarPorRg(String rg);
-    
-    public List<Cliente> buscarPorNome(String nome);
+    public List<Pet> buscarPorNome(String nome);
     
 }

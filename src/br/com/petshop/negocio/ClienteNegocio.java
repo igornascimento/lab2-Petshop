@@ -5,6 +5,7 @@
  */
 package br.com.petshop.negocio;
 
+import br.com.petshop.Dao.ClienteDao;
 import br.com.petshop.DaoDB.ClienteDaoDB;
 import br.com.petshop.dominio.Cliente;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class ClienteNegocio {
     
-    private ClienteDaoDB clienteDao;
+    private ClienteDao clienteDao;
     
     public ClienteNegocio() {
         clienteDao = new ClienteDaoDB();

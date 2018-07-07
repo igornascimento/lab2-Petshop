@@ -5,8 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.com.petshop.viewfxcontroller.ClienteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.petshop.viewfxcontroller.ClienteController">
    <children>
       <Pane prefHeight="400.0" prefWidth="117.0" style="-fx-background-color: #45A5EA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Label layoutX="171.0" layoutY="65.0" text="Cadastro de Clientes">
@@ -14,10 +13,11 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="171.0" layoutY="128.0" prefHeight="25.0" prefWidth="259.0" promptText="Nome" fx:id="clienteNome" />
-      <TextField layoutX="171.0" layoutY="180.0" prefHeight="25.0" prefWidth="259.0" promptText="RG" fx:id="clienteRG" />
-      <TextField layoutX="171.0" layoutY="233.0" prefHeight="25.0" prefWidth="259.0" promptText="Telefone" fx:id="clienteTelefone" />
-      <Button layoutX="203.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Cadastrar" onAction="#cadastrar" />
-      <Button layoutX="323.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Cancelar" onAction="#cancelar" />
+      <TextField fx:id="txtClienteNome" layoutX="171.0" layoutY="128.0" prefHeight="25.0" prefWidth="259.0" promptText="Nome" />
+      <TextField fx:id="txtClienteRG" layoutX="171.0" layoutY="180.0" prefHeight="25.0" prefWidth="259.0" promptText="RG" />
+      <TextField fx:id="txtClienteTelefone" layoutX="171.0" layoutY="233.0" prefHeight="25.0" prefWidth="259.0" promptText="Telefone" />
+      <Button layoutX="203.0" layoutY="288.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="107.0" text="Cadastrar" />
+      <Button layoutX="323.0" layoutY="288.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="107.0" text="Cancelar" />
+      <Text id="txtClienteFeedback" layoutX="171.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="259.0" />
    </children>
 </AnchorPane>

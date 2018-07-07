@@ -5,7 +5,7 @@
  */
 package br.com.petshop.DB;
 
-import br.com.petshop.dao.Dao;
+import br.com.petshop.Dao.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
