@@ -6,6 +6,7 @@
 package br.com.petshop.Dao;
 
 import br.com.petshop.dominio.Cliente;
+import br.com.petshop.dao.Dao;
 import java.util.List;
 
 /**

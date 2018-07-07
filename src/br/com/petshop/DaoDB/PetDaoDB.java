@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class PetDaoDB extends DaoDB<Pet> implements PetDao {
 
+    private ClienteDaoDB clienteDAO = new ClienteDaoDB();
+    
     @Override
     public void salvar(Pet pet) {
         int id = 0;
@@ -95,7 +97,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = ClienteDaoDB.buscarPorId( resultado.getInt("cliente") );
+                Cliente cliente = clienteDAO.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);
             }
@@ -120,7 +122,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 int tipo = resultado.getInt("tipo");
-                Cliente cliente = ClienteDaoDB.buscarPorId( resultado.getInt("cliente") );
+                Cliente cliente = clienteDAO.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 return pet;
             }
@@ -134,8 +136,30 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
     }
 
     @Override
-    public List<Cliente> buscarPorNome(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Pet> buscarPorNome(String nomeBusca) {
+        List<Pet> listaPets = new ArrayList<>();
+        String sql = "SELECT * FROM pet WHERE nome LIKE ?";
+
+        try {
+            conectar(sql);
+            comando.setString(1, "%" + nomeBusca + "%");
+            ResultSet resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                int tipo = resultado.getInt("tipo");
+                Cliente cliente = clienteDAO.buscarPorId( resultado.getInt("cliente") );
+                Pet pet = new Pet(id, nome, tipo, cliente);
+                listaPets.add(pet);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar os pacientes pelo nome do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+        return (listaPets);
     }
     
 }

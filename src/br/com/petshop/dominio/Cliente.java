@@ -26,6 +26,13 @@ public class Cliente {
             this.pets = new HashMap<>();
     }
     
+    public Cliente(String rg, String nome, String telefone) {
+            this.rg = rg;
+            this.nome = nome;
+            this.telefone = telefone;
+            this.pets = new HashMap<>();
+    }
+    
     public int getId() {
             return id;
     }

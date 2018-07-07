@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface PetDao extends Dao<Pet> {
     
-    public List<Cliente> buscarPorNome(String nome);
+    public List<Pet> buscarPorNome(String nome);
     
 }

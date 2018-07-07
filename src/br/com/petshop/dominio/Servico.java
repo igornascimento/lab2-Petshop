@@ -16,8 +16,14 @@ public class Servico {
 	public Servico() {
 	}
 	
-	public Servico(String nome, String tipo, double preco) {
-		this.id = ++this.id;
+	public Servico(int id, String nome, String tipo, double preco) {
+		this.id = id;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.preco = preco;
+	}
+        
+        public Servico(String nome, String tipo, double preco) {
 		this.nome = nome;
 		this.tipo = tipo;
 		this.preco = preco;

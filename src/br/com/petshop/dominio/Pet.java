@@ -15,13 +15,19 @@ public class Pet {
 	private Cliente cliente;
 	
 	public Pet(String nome, int tipo) {
-            this.id = ++this.id;
             this.nome = nome;
             this.tipo = tipo;
 	}
 	
 	public Pet(int id, String nome, int tipo, Cliente cliente) {
-		this.id = ++this.id;
+		this.id = id;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.cliente = cliente;
+	}
+        
+        public Pet(String nome, int tipo, Cliente cliente) {
+		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cliente = cliente;

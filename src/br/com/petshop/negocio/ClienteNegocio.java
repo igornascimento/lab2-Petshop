@@ -41,7 +41,7 @@ public class ClienteNegocio {
     
     public void atualizar(Cliente cliente) throws NegocioException {
         if (cliente == null || cliente.getRg() == null) {
-            throw new NegocioException("Paciente nao existe!");
+            throw new NegocioException("Cliente nao existe!");
         }
         this.validarCamposObrigatorios(cliente);
         clienteDao.atualizar(cliente);
@@ -53,7 +53,7 @@ public class ClienteNegocio {
         }
         Cliente cliente = clienteDao.buscarPorRg(rg);
         if (cliente == null) {
-            throw new NegocioException("Paciente nao encontrado");
+            throw new NegocioException("Cliente nao encontrado");
         }
         return (cliente);
     }
