@@ -14,19 +14,18 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtClienteNome" layoutX="171.0" layoutY="128.0" prefHeight="25.0" prefWidth="259.0" promptText="Nome" />
-      <TextField fx:id="txtClienteTelefone" layoutX="171.0" layoutY="233.0" prefHeight="25.0" prefWidth="259.0" promptText="Telefone" />
-      <Button layoutX="203.0" layoutY="288.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="107.0" text="Cadastrar" />
-      <Button layoutX="323.0" layoutY="288.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="107.0" text="Cancelar" />
-      <Text id="txtClienteFeedback" layoutX="171.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="259.0" />
+      <TextField fx:id="txtPetNome" layoutX="171.0" layoutY="128.0" prefHeight="25.0" prefWidth="259.0" promptText="Nome" />
       <ComboBox layoutX="171.0" layoutY="180.0" prefHeight="25.0" prefWidth="259.0" promptText="Tipo de animal">
         <items>
-          <FXCollections fx:factory="observableArrayList">
+          <FXCollections fx:factory="observableArrayList" fx:id="txtPetTipo" >
             <String fx:value="Gato" />
             <String fx:value="Cachorro" />
             <String fx:value="Outros" />
           </FXCollections>
         </items>
       </ComboBox>
+      <Button layoutX="203.0" layoutY="288.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="107.0" text="Cadastrar" />
+      <Button layoutX="323.0" layoutY="288.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="107.0" text="Cancelar" />
+      <Text id="txtClienteFeedback" layoutX="171.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="259.0" />
    </children>
 </AnchorPane>

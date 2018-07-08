@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  *
@@ -20,18 +21,11 @@ import javafx.scene.text.Text;
 public class ClienteController {
     
     private ClienteNegocio clienteNegocio;
-    @FXML
-    private TextField txtClienteNome;
-    @FXML
-    private TextField txtClienteRG;
-    @FXML
-    private TextField txtClienteTelefone;
-    @FXML
-    private Text txtClienteFeedback;
+    @FXML private TextField txtClienteNome;
+    @FXML private TextField txtClienteRG;
+    @FXML private TextField txtClienteTelefone;
+    @FXML private Text txtClienteFeedback;
     
-//    public ClienteController(){
-//        clienteNegocio = new ClienteNegocio();
-//    }
     
     @FXML
     private void cadastrar(ActionEvent event) {
@@ -52,7 +46,7 @@ public class ClienteController {
     }
     
     @FXML
-    private void cancelar() {
+    private void cancelar(ActionEvent event) {
         
     }
     
