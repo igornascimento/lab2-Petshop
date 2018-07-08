@@ -63,7 +63,7 @@ public class MainController {
      */
     @FXML
     private void listarClientes() {
-//        listaClientes = (ObservableList<Cliente>) clienteNegocio.listar();
+        listaClientes = (ObservableList<Cliente>) clienteNegocio.listar();
         
         TableView table = new TableView();
         TableColumn idColumn = new TableColumn("ID");
@@ -81,7 +81,7 @@ public class MainController {
      */
     @FXML
     private void listarPets() {
-//        listaPets = (ObservableList<Pet>) petNegocio.listar();
+        listaPets = (ObservableList<Pet>) petNegocio.listar();
         
         TableView table = new TableView();
         TableColumn idColumn = new TableColumn("ID");
