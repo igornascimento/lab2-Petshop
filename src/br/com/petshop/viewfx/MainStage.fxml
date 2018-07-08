@@ -14,32 +14,27 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Clientes">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Listar" />
-                        <MenuItem mnemonicParsing="false" onAction="#showFormCliente" text="Cadastrar" />
+                    <MenuItem mnemonicParsing="false" onAction="#listarClientes" text="Listar" />
+                    <MenuItem mnemonicParsing="false" onAction="#showFormCliente" text="Cadastrar" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Pets">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Listar" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar" />
+                    <MenuItem mnemonicParsing="false" onAction="#listarPets" text="Listar" />
+                    <MenuItem mnemonicParsing="false" onAction="#showFormPet" text="Cadastrar" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Serviços">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Listar" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar" />
+                    <MenuItem mnemonicParsing="false" text="Cadastrar" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
          </top>
          <center>
-            <TableView id="tableGeneralResults" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
+            <Pane fx:id="tableGeneralResults" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

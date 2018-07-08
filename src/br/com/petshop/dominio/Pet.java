@@ -11,22 +11,22 @@ public class Pet {
 
 	private static int id = 0;
 	private String nome;
-	private int tipo;
+	private String tipo;
 	private Cliente cliente;
 	
-	public Pet(String nome, int tipo) {
+	public Pet(String nome, String tipo) {
             this.nome = nome;
             this.tipo = tipo;
 	}
 	
-	public Pet(int id, String nome, int tipo, Cliente cliente) {
+	public Pet(int id, String nome, String tipo, Cliente cliente) {
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
 		this.cliente = cliente;
 	}
         
-        public Pet(String nome, int tipo, Cliente cliente) {
+        public Pet(String nome, String tipo, Cliente cliente) {
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
@@ -49,11 +49,11 @@ public class Pet {
 		this.nome = nome;
 	}
 
-	public int getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 

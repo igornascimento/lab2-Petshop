@@ -65,7 +65,7 @@ public class PetUI {
             } else {
                 Pet pet = new Pet(
                     Console.scanString("Nome do pet:"),
-                    Console.scanInt("Tipo de animal (1-gato|2-cachorro)"),
+                    Console.scanString("Tipo de animal (Gato|Cachorro)"),
                     cliente);
                 petMap.put(pet.getId(), pet);
                 cliente.getPets().put(pet.getId(), pet);
@@ -92,7 +92,7 @@ public class PetUI {
             System.out.println(
                 String.format("%-20s", "|" + id) + "\t" +
                 String.format("%-20s", "|" + pet.getNome()) + "\t" +
-                String.format("%-20s", "|" + (pet.getTipo() == 1 ? "gato" : "cachorro")) + "\t" +
+                String.format("%-20s", "|" + pet.getTipo()) + "\t" +
                 String.format("%-20s", "|" + pet.getCliente().getNome()) );
         });
     }

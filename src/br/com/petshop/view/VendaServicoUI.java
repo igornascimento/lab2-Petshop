@@ -38,12 +38,12 @@ public class VendaServicoUI {
         // populando itens para teste
         this.clienteMap.put("12341234", new Cliente("12341234", "José da Silva", "56785678"));
         Map<Integer, Pet> pets1 = new HashMap<>();
-        pets1.put(1, new Pet("Oliver", 1));
-        pets1.put(2, new Pet("Maneco", 2));
+        pets1.put(1, new Pet("Oliver", "Gatp"));
+        pets1.put(2, new Pet("Maneco", "Cachorro"));
         this.clienteMap.get("12341234").setPets(pets1);
         this.clienteMap.put("23452345", new Cliente("23452345", "Maria Almeida", "85687589"));
         Map<Integer, Pet> pets2 = new HashMap<>();
-        pets2.put(1, new Pet("Nica", 2));
+        pets2.put(1, new Pet("Nica", "Gato"));
         this.clienteMap.get("23452345").setPets(pets2);
         this.servicoMap.put(1, new Servico("Banho", "banho", 50.00));
         this.servicoMap.put(2, new Servico("Tosa", "tosa", 70.00));
@@ -125,7 +125,7 @@ public class VendaServicoUI {
             System.out.println(
                 String.format("%-20s", "|" + id) + "\t" +
                 String.format("%-20s", "|" + pet.getNome()) + "\t" +
-                String.format("%-20s", "|" + (pet.getTipo() == 1 ? "gato" : "cachorro")) );
+                String.format("%-20s", "|" + pet.getTipo()) );
         });
     }
     
@@ -151,7 +151,7 @@ public class VendaServicoUI {
                         String.format("%-20s", "|" + id) + "\t" +
                         String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t" +
                         String.format("%-20s", "|" + venda.getPet().getNome()) + "\t" +
-                        String.format("%-20s", "|" + (venda.getPet().getTipo() == 1 ? "Gato" : "Cachorro")) + "\t" +
+                        String.format("%-20s", "|" + venda.getPet().getTipo()) + "\t" +
                         String.format("%-20s", "|" + (servico != null ? servico.getNome() : "")) + "\t" +
                         String.format("%-20s", "|" + venda.getDatahora().format(formatter)) + "\t" +
                         String.format("%-20s", "|" + (servico != null ? servico.getPreco() : "")) );

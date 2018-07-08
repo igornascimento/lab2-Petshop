@@ -5,6 +5,7 @@
  */
 package br.com.petshop.negocio;
 
+import br.com.petshop.Dao.PetDao;
 import br.com.petshop.DaoDB.PetDaoDB;
 import br.com.petshop.dominio.Pet;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class PetNegocio {
     
-    private PetDaoDB petDao;
+    private PetDao petDao;
     
     public PetNegocio() {
         petDao = new PetDaoDB();

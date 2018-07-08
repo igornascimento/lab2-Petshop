@@ -31,7 +31,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             String sql = "INSERT INTO pet (nome, tipo, cliente) VALUES (?,?,?)";
             conectarObtendoId(sql);
             comando.setString(2, pet.getNome());
-            comando.setInt(1, pet.getTipo());
+            comando.setString(1, pet.getTipo());
             comando.setInt(3, pet.getCliente().getId());
             comando.executeUpdate();
             ResultSet resultado = comando.getGeneratedKeys();
@@ -73,7 +73,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             String sql = "UPDATE pet SET nome=?, tipo=?, cliente=? WHERE id=?";
             conectar(sql);
             comando.setString(1, pet.getNome());
-            comando.setInt(2, pet.getTipo());
+            comando.setString(2, pet.getTipo());
             comando.setInt(3, pet.getCliente().getId());
             comando.setInt(4, pet.getId());
             comando.executeUpdate();
@@ -96,7 +96,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             while (resultado.next()) {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
-                int tipo = resultado.getInt("tipo");
+                String tipo = resultado.getString("tipo");
                 Cliente cliente = clienteDAO.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);
@@ -121,7 +121,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             if (resultado.next()) {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
-                int tipo = resultado.getInt("tipo");
+                String tipo = resultado.getString("tipo");
                 Cliente cliente = clienteDAO.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 return pet;
@@ -148,7 +148,7 @@ public class PetDaoDB extends DaoDB<Pet> implements PetDao {
             while (resultado.next()) {
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
-                int tipo = resultado.getInt("tipo");
+                String tipo = resultado.getString("tipo");
                 Cliente cliente = clienteDAO.buscarPorId( resultado.getInt("cliente") );
                 Pet pet = new Pet(id, nome, tipo, cliente);
                 listaPets.add(pet);

@@ -22,7 +22,7 @@ CREATE TABLE pet
 (
   id integer,
   nome character(50),
-  tipo integer
+  tipo character(50)
 );
 
 
