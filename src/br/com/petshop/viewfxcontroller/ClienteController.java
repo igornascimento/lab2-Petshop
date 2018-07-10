@@ -29,12 +29,28 @@ public class ClienteController {
     
     @FXML
     private void cadastrar(ActionEvent event) {
-        clienteNegocio = new ClienteNegocio();
         try {
             clienteNegocio.salvar(
                     new Cliente(txtClienteNome.getText(),
                                 txtClienteRG.getText(),
                                 txtClienteTelefone.getText()));
+            txtClienteFeedback.setText("Cliente cadastrado com sucesso!");
+        } catch(Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO!");
+            alerta.setHeaderText("Erro!");
+            alerta.setContentText(e.getMessage());
+            alerta.showAndWait();
+        }
+    }
+    
+    public void editar(ActionEvent event, String rg) {
+        try {
+            Cliente cliente = clienteNegocio.buscarPorRg(rg);
+            cliente.setNome(txtClienteNome.getText());
+            cliente.setRg(txtClienteRG.getText());
+            cliente.setTelefone(txtClienteNome.getText());
+            clienteNegocio.atualizar(cliente);
             txtClienteFeedback.setText("Cliente cadastrado com sucesso!");
         } catch(Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);

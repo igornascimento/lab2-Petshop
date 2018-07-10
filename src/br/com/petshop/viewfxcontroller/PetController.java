@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
  */
 public class PetController {
     
-    private PetNegocio clienteNegocio;
+    private PetNegocio petNegocio;
     @FXML private TextField txtPetNome;
     @FXML private TextField txtPetTipo;
     @FXML private Text txtPetFeedback;
@@ -27,11 +27,26 @@ public class PetController {
     
     @FXML
     private void cadastrar(ActionEvent event) {
-        clienteNegocio = new PetNegocio();
         try {
-            clienteNegocio.salvar(
+            petNegocio.salvar(
                     new Pet(txtPetNome.getText(),
                             txtPetTipo.getText()));
+            txtPetFeedback.setText("Cliente cadastrado com sucesso!");
+        } catch(Exception e) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO!");
+            alerta.setHeaderText("Erro!");
+            alerta.setContentText(e.getMessage());
+            alerta.showAndWait();
+        }
+    }
+    
+    public void editar(ActionEvent event, int id) {
+        try {
+            Pet pet = petNegocio.buscarPorId(id);
+            pet.setNome(txtPetNome.getText());
+            pet.setTipo(txtPetTipo.getText());
+            petNegocio.atualizar(pet);
             txtPetFeedback.setText("Cliente cadastrado com sucesso!");
         } catch(Exception e) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);

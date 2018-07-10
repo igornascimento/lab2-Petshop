@@ -73,6 +73,12 @@ public class MainController {
         table.getColumns().setAll(idColumn, rgColumn, nameColumn, phoneColumn);
         table.setItems(listaClientes);
         
+        // ADICIONAR EVENTO PARA ABIR A JANELA DE EDICAO //
+        ClienteController clienteController = new ClienteController();
+        table.getSelectionModel().selectedItemProperty().addListener((item) -> {
+            // clienteController.editar(item.getRg());
+        });
+        
         tableGeneralResults.getChildren().add(table);
     }
     
@@ -89,6 +95,12 @@ public class MainController {
         TableColumn typeColumn = new TableColumn("Tipo");
         table.getColumns().setAll(idColumn, nameColumn, typeColumn);
         table.setItems(listaPets);
+        
+        // ADICIONAR EVENTO PARA ABIR A JANELA DE EDICAO //
+        PetController petController = new PetController();
+        table.getSelectionModel().selectedItemProperty().addListener((item) -> {
+            // petController.editar(item.getId());
+        });
         
         tableGeneralResults.getChildren().add(table);
     }

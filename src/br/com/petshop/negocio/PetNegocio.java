@@ -53,6 +53,13 @@ public class PetNegocio {
         return(petDao.buscarPorNome(nome));
     }
     
+    public Pet buscarPorId(int id) throws NegocioException {
+        if (id < 0) {
+            throw new NegocioException("Campo ID nao informado");
+        }
+        return(petDao.buscarPorId(id));
+    }
+    
     public boolean petExiste(String nome, String nomeProprietario) {
         List<Pet> petList = petDao.buscarPorNome(nome);
         for (Pet p : petList) {
