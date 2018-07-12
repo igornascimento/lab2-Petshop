@@ -38,6 +38,11 @@ public class MainController {
     @FXML private ObservableList<Pet> listaPets = FXCollections.observableArrayList();
     @FXML public Pane tableGeneralResults;
     
+    /**
+     * Shows the customer form
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void showFormCliente(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/br/com/petshop/viewfx/ClienteForm.fxml"));
@@ -49,6 +54,11 @@ public class MainController {
         cadastrarCliente.show();
     }
     
+    /**
+     * Shows the pet form
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void showFormPet(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/br/com/petshop/viewfx/PetForm.fxml"));
@@ -61,20 +71,21 @@ public class MainController {
     }
     
     /**
-     * Mounts the table with the clients list
+     * Prepare customers list
      */
     @FXML
     private void listarClientes() {
-        List<Cliente> lista = clienteNegocio.listar();
-        listaClientes = FXCollections.observableArrayList(lista);
+//        List<Cliente> lista = clienteNegocio.listar();
+
         // populando para teste
-//        listaClientes.add(new Cliente(1, "23452345", "Igor Nascimento", "5199999999"));
-//        listaClientes.add(new Cliente(2, "26345634", "Luiz Antonio", "5198798789"));
-//        listaClientes.add(new Cliente(3, "67896789", "Maria da Silva", "5190868906"));
-//        listaClientes.add(new Cliente(4, "22292665", "Joao Machado", "51768757677"));
+        List<Cliente> lista = FXCollections.observableArrayList();
+        lista.add(new Cliente(1, "23452345", "Igor Nascimento", "5199999999"));
+        lista.add(new Cliente(2, "26345634", "Luiz Antonio", "5198798789"));
+        lista.add(new Cliente(3, "67896789", "Maria da Silva", "5190868906"));
+        lista.add(new Cliente(4, "22292665", "Joao Machado", "51768757677"));
+        listaClientes = (ObservableList<Cliente>) lista;
         
-        TableView table = new TableView();
-        table.getColumns().clear();
+        // preparando as colunas
         TableColumn<Cliente, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Cliente, String> rgColumn = new TableColumn<>("RG");
         TableColumn<Cliente, String> nameColumn = new TableColumn<>("Nome");
@@ -84,32 +95,33 @@ public class MainController {
         nameColumn.setCellValueFactory(new PropertyValueFactory("nome"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory("telefone"));
         
-        table.getColumns().addAll(idColumn, rgColumn, nameColumn, phoneColumn);
-        table.setItems(listaClientes);
+        List<TableColumn> colNames = new ArrayList();
+        colNames.add(idColumn);
+        colNames.add(rgColumn);
+        colNames.add(nameColumn);
+        colNames.add(phoneColumn);
         
-        // ADICIONAR EVENTO PARA ABIR A JANELA DE EDICAO //
-        ClienteController clienteController = new ClienteController();
-        table.getSelectionModel().selectedItemProperty().addListener((item) -> {
-            // clienteController.editar(item.getRg());
-        });
-        
-        tableGeneralResults.getChildren().add(table);
+        TableView table = new TableView();
+        table.getColumns().addAll(colNames);
+        populateTable(table, listaClientes);
     }
     
     /**
-     * Mounts the table with the pets list
+     * Prepares pets list
      */
     @FXML
     private void listarPets() {
-        listaPets = (ObservableList<Pet>) petNegocio.listar();
-        // populando para testes
-//        listaPets.add(new Pet(1, "Oliver", "Gato"));
-//        listaPets.add(new Pet(2, "Pitoco", "Cachorro"));
-//        listaPets.add(new Pet(3, "Luna", "Cachorro"));
-//        listaPets.add(new Pet(4, "Brutus", "Gato"));
+//        listaPets = (ObservableList<Pet>) petNegocio.listar();
         
-        TableView table = new TableView();
-        table.getColumns().clear();
+        // populando para testes
+        List<Pet> lista = FXCollections.observableArrayList();
+        lista.add(new Pet(1, "Oliver", "Gato"));
+        lista.add(new Pet(2, "Pitoco", "Cachorro"));
+        lista.add(new Pet(3, "Luna", "Cachorro"));
+        lista.add(new Pet(4, "Brutus", "Gato"));
+        listaPets = (ObservableList<Pet>) lista;
+        
+        // preparando as colunas
         TableColumn<Pet, Integer> idColumn = new TableColumn<>("ID");
         TableColumn<Pet, String> nameColumn = new TableColumn<>("Nome");
         TableColumn<Pet, String> typeColumn = new TableColumn<>("Tipo");
@@ -117,16 +129,27 @@ public class MainController {
         nameColumn.setCellValueFactory(new PropertyValueFactory("nome"));
         typeColumn.setCellValueFactory(new PropertyValueFactory("tipo"));
         
-        table.getColumns().addAll(idColumn, nameColumn, typeColumn);
-        table.setItems((ObservableList) listaPets);
+        List<TableColumn> colNames = new ArrayList();
+        colNames.add(idColumn);
+        colNames.add(nameColumn);
+        colNames.add(typeColumn);
         
-        // ADICIONAR EVENTO PARA ABIR A JANELA DE EDICAO //
-        PetController petController = new PetController();
-        table.getSelectionModel().selectedItemProperty().addListener((item) -> {
-            // petController.editar(item.getId());
-        });
-        
+        TableView table = new TableView();
+        table.getColumns().addAll(colNames);
+        populateTable(table, listaPets);
+    }
+    
+    /**
+     * Shows the final table in UI
+     * @param table
+     * @param listItems 
+     */
+    private void populateTable(TableView table, ObservableList listItems) {
+        table.prefWidthProperty().bind(tableGeneralResults.widthProperty());
+        table.setItems((ObservableList) listItems);
+        table.setEditable(false);
         tableGeneralResults.getChildren().add(table);
+        
     }
     
 }
