@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  */
 public class ClienteController {
     
-    private ClienteNegocio clienteNegocio;
+    private ClienteNegocio clienteNegocio = new ClienteNegocio();
     @FXML private TextField txtClienteNome;
     @FXML private TextField txtClienteRG;
     @FXML private TextField txtClienteTelefone;

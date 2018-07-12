@@ -18,6 +18,12 @@ public class Pet {
             this.nome = nome;
             this.tipo = tipo;
 	}
+        
+        public Pet(int id, String nome, String tipo) {
+            this.id = id;
+            this.nome = nome;
+            this.tipo = tipo;
+	}
 	
 	public Pet(int id, String nome, String tipo, Cliente cliente) {
 		this.id = id;
