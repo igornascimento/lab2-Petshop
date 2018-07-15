@@ -31,8 +31,8 @@ public class ClienteController {
     private void cadastrar(ActionEvent event) {
         try {
             clienteNegocio.salvar(
-                    new Cliente(txtClienteNome.getText(),
-                                txtClienteRG.getText(),
+                    new Cliente(txtClienteRG.getText(),
+                                txtClienteNome.getText(),
                                 txtClienteTelefone.getText()));
             txtClienteFeedback.setText("Cliente cadastrado com sucesso!");
         } catch(Exception e) {
