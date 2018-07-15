@@ -1,7 +1,7 @@
 -- DROP TABLE cliente;
 CREATE TABLE cliente
 (
-  id integer,
+  id serial,
   rg character(100),
   nome character(100),
   telefone character(50)
@@ -11,7 +11,7 @@ CREATE TABLE cliente
 -- DROP TABLE cliente_pet;
 CREATE TABLE cliente_pet
 (
-  id integer,
+  id serial,
   cliente integer,
   pet integer
 );
@@ -20,7 +20,7 @@ CREATE TABLE cliente_pet
 -- DROP TABLE pet;
 CREATE TABLE pet
 (
-  id integer,
+  id serial,
   nome character(50),
   tipo character(50)
 );
@@ -29,7 +29,7 @@ CREATE TABLE pet
 -- DROP TABLE pet_servico;
 CREATE TABLE pet_servico
 (
-  id integer,
+  id serial,
   pet integer,
   servico integer
 );
@@ -38,7 +38,7 @@ CREATE TABLE pet_servico
 -- DROP TABLE servico;
 CREATE TABLE servico
 (
-  id integer,
+  id serial,
   tipo character(50),
   preco double precision
 );
