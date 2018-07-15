@@ -75,15 +75,15 @@ public class MainController {
      */
     @FXML
     private void listarClientes() {
-//        List<Cliente> lista = clienteNegocio.listar();
+        listaClientes = FXCollections.observableArrayList(clienteNegocio.listar());
 
-        // populando para teste
-        List<Cliente> lista = FXCollections.observableArrayList();
-        lista.add(new Cliente(1, "23452345", "Igor Nascimento", "5199999999"));
-        lista.add(new Cliente(2, "26345634", "Luiz Antonio", "5198798789"));
-        lista.add(new Cliente(3, "67896789", "Maria da Silva", "5190868906"));
-        lista.add(new Cliente(4, "22292665", "Joao Machado", "51768757677"));
-        listaClientes = (ObservableList<Cliente>) lista;
+//        // populando para teste
+//        List<Cliente> lista = FXCollections.observableArrayList();
+//        lista.add(new Cliente(1, "23452345", "Igor Nascimento", "5199999999"));
+//        lista.add(new Cliente(2, "26345634", "Luiz Antonio", "5198798789"));
+//        lista.add(new Cliente(3, "67896789", "Maria da Silva", "5190868906"));
+//        lista.add(new Cliente(4, "22292665", "Joao Machado", "51768757677"));
+//        listaPets = (ObservableList<Cliente>) lista;
         
         // preparando as colunas
         TableColumn<Cliente, Integer> idColumn = new TableColumn<>("ID");
@@ -111,15 +111,15 @@ public class MainController {
      */
     @FXML
     private void listarPets() {
-//        listaPets = (ObservableList<Pet>) petNegocio.listar();
+        listaPets = FXCollections.observableArrayList(petNegocio.listar());
         
-        // populando para testes
-        List<Pet> lista = FXCollections.observableArrayList();
-        lista.add(new Pet(1, "Oliver", "Gato"));
-        lista.add(new Pet(2, "Pitoco", "Cachorro"));
-        lista.add(new Pet(3, "Luna", "Cachorro"));
-        lista.add(new Pet(4, "Brutus", "Gato"));
-        listaPets = (ObservableList<Pet>) lista;
+//        // populando para testes
+//        List<Pet> lista = FXCollections.observableArrayList();
+//        lista.add(new Pet(1, "Oliver", "Gato"));
+//        lista.add(new Pet(2, "Pitoco", "Cachorro"));
+//        lista.add(new Pet(3, "Luna", "Cachorro"));
+//        lista.add(new Pet(4, "Brutus", "Gato"));
+//        listaPets = (ObservableList<Pet>) lista;
         
         // preparando as colunas
         TableColumn<Pet, Integer> idColumn = new TableColumn<>("ID");
