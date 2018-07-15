@@ -6,10 +6,19 @@
 package br.com.petshop.viewfxcontroller;
 
 import br.com.petshop.dominio.Pet;
+import br.com.petshop.dominio.Cliente;
+import br.com.petshop.negocio.ClienteNegocio;
 import br.com.petshop.negocio.PetNegocio;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -17,13 +26,20 @@ import javafx.scene.text.Text;
  *
  * @author Igor Nascimento <igornascimento@gmail.com>
  */
-public class PetController {
+public class PetController implements Initializable {
     
-    private PetNegocio petNegocio;
+    private PetNegocio petNegocio = new PetNegocio();
+    private ClienteNegocio clienteNegocio = new ClienteNegocio();
     @FXML private TextField txtPetNome;
     @FXML private TextField txtPetTipo;
     @FXML private Text txtPetFeedback;
+    @FXML private ComboBox<Cliente> ownerPicker = new ComboBox<>();
     
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<Cliente> listaClientes = FXCollections.observableArrayList(clienteNegocio.listar());
+        ownerPicker.setItems(listaClientes);
+    }
     
     @FXML
     private void cadastrar(ActionEvent event) {

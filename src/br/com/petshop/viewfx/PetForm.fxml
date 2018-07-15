@@ -17,11 +17,16 @@
       <TextField fx:id="txtPetNome" layoutX="171.0" layoutY="128.0" prefHeight="25.0" prefWidth="259.0" promptText="Nome" />
       <ComboBox layoutX="171.0" layoutY="180.0" prefHeight="25.0" prefWidth="259.0" promptText="Tipo de animal">
         <items>
-          <FXCollections fx:factory="observableArrayList" fx:id="txtPetTipo" >
+          <FXCollections fx:id="txtPetTipo" fx:factory="observableArrayList">
             <String fx:value="Gato" />
             <String fx:value="Cachorro" />
             <String fx:value="Outros" />
           </FXCollections>
+        </items>
+      </ComboBox>
+      <ComboBox layoutX="171.0" layoutY="230.0" prefHeight="25.0" prefWidth="259.0" promptText="Proprietário">
+        <items>
+          <FXCollections fx:id="ownerPicker" fx:factory="observableArrayList" />
         </items>
       </ComboBox>
       <Button layoutX="203.0" layoutY="288.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="107.0" text="Cadastrar" />
