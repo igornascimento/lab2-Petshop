@@ -18,12 +18,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  *
@@ -90,16 +93,19 @@ public class MainController {
         TableColumn<Cliente, String> rgColumn = new TableColumn<>("RG");
         TableColumn<Cliente, String> nameColumn = new TableColumn<>("Nome");
         TableColumn<Cliente, String> phoneColumn = new TableColumn<>("Telefone");
+        TableColumn actionColumn = new TableColumn("#");
         idColumn.setCellValueFactory(new PropertyValueFactory("id"));
         rgColumn.setCellValueFactory(new PropertyValueFactory("rg"));
         nameColumn.setCellValueFactory(new PropertyValueFactory("nome"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory("telefone"));
+        actionColumn.setCellValueFactory(new PropertyValueFactory("Dummy value"));
         
         List<TableColumn> colNames = new ArrayList();
         colNames.add(idColumn);
         colNames.add(rgColumn);
         colNames.add(nameColumn);
         colNames.add(phoneColumn);
+        colNames.add(actionColumn);
         
         TableView table = new TableView();
         table.getColumns().addAll(colNames);
@@ -150,6 +156,20 @@ public class MainController {
         table.setEditable(false);
         tableGeneralResults.getChildren().add(table);
         
+        // putting edit button action
+        Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>> cellFactory = new Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>>() {
+            @Override
+            public TableCell<Cliente, String> call(TableColumn<Cliente, String> param) {
+                final TableCell<Cliente, String> cell = new TableCell<Cliente, String>() {
+                    final Button btn = new Button("Editar");
+                    
+                    @Override
+                    public void updateItem() {
+                        
+                    }
+                }
+            }
+        };
     }
     
 }

@@ -42,3 +42,13 @@ CREATE TABLE servico
   tipo character(50),
   preco double precision
 );
+
+
+-- POPULATE SOME VALUES:
+INSERT INTO cliente (rg, nome, telefone) VALUES ('2345234534', 'Igor Nascimento', '9438754734');
+INSERT INTO cliente (rg, nome, telefone) VALUES ('8237842378', 'João da Silva', '983489839');
+INSERT INTO cliente (rg, nome, telefone) VALUES ('6723236787', 'Maria Santos', '905904509');
+
+INSERT INTO pet (nome, tipo) VALUES ('Oliver', 'Gato');
+INSERT INTO pet (nome, tipo) VALUES ('Luna', 'Cachorro');
+INSERT INTO pet (nome, tipo) VALUES ('Deco', 'Cachorro');

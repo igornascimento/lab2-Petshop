@@ -17,10 +17,10 @@ public class BDUtil {
     
     private static final String HOST = "localhost";
     private static final String PORT = "5432";
-//    private static final String BD = "postgres";
-//    private static final String SCHEMA = "?searchpath=lab2_petshop"; // leave empty for none schema
-    private static final String BD = "lab2_petshop";
-    private static final String SCHEMA = ""; // leave empty for none schema
+    private static final String BD = "postgres";
+    private static final String SCHEMA = "?searchpath=lab2_petshop"; // leave empty for none schema
+//    private static final String BD = "lab2_petshop";
+//    private static final String SCHEMA = ""; // leave empty for none schema
     private static final String URL = "jdbc:postgresql://"+HOST+":"+PORT+"/"+BD+SCHEMA;
     private static final String USER = "postgres";
     private static final String PASSWORD = "admin";
