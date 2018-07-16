@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -117,15 +118,15 @@ public class MainController {
      */
     @FXML
     private void listarPets() {
-        listaPets = FXCollections.observableArrayList(petNegocio.listar());
+//        listaPets = FXCollections.observableArrayList(petNegocio.listar());
         
-//        // populando para testes
-//        List<Pet> lista = FXCollections.observableArrayList();
-//        lista.add(new Pet(1, "Oliver", "Gato"));
-//        lista.add(new Pet(2, "Pitoco", "Cachorro"));
-//        lista.add(new Pet(3, "Luna", "Cachorro"));
-//        lista.add(new Pet(4, "Brutus", "Gato"));
-//        listaPets = (ObservableList<Pet>) lista;
+        // populando para testes
+        List<Pet> lista = FXCollections.observableArrayList();
+        lista.add(new Pet(1, "Oliver", "Gato"));
+        lista.add(new Pet(2, "Pitoco", "Cachorro"));
+        lista.add(new Pet(3, "Luna", "Cachorro"));
+        lista.add(new Pet(4, "Brutus", "Gato"));
+        listaPets = (ObservableList<Pet>) lista;
         
         // preparando as colunas
         TableColumn<Pet, Integer> idColumn = new TableColumn<>("ID");
@@ -155,6 +156,18 @@ public class MainController {
         table.setItems((ObservableList) listItems);
         table.setEditable(false);
         tableGeneralResults.getChildren().add(table);
+        
+        // setting row click event
+        table.setRowFactory(tblView -> {
+            TableRow<Cliente> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty()) {
+                    Cliente cliente = row.getItem();
+                    System.out.println(cliente.getId());
+                }
+            });
+            return row;
+        });
     }
     
 }
