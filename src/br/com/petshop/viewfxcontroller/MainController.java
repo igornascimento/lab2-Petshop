@@ -93,12 +93,12 @@ public class MainController {
         TableColumn<Cliente, String> rgColumn = new TableColumn<>("RG");
         TableColumn<Cliente, String> nameColumn = new TableColumn<>("Nome");
         TableColumn<Cliente, String> phoneColumn = new TableColumn<>("Telefone");
-        TableColumn actionColumn = new TableColumn("#");
+        TableColumn<Cliente, Button> actionColumn = new TableColumn<>("#");
         idColumn.setCellValueFactory(new PropertyValueFactory("id"));
         rgColumn.setCellValueFactory(new PropertyValueFactory("rg"));
         nameColumn.setCellValueFactory(new PropertyValueFactory("nome"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory("telefone"));
-        actionColumn.setCellValueFactory(new PropertyValueFactory("Dummy value"));
+        actionColumn.setCellValueFactory(new PropertyValueFactory("btnAction"));
         
         List<TableColumn> colNames = new ArrayList();
         colNames.add(idColumn);
@@ -155,21 +155,6 @@ public class MainController {
         table.setItems((ObservableList) listItems);
         table.setEditable(false);
         tableGeneralResults.getChildren().add(table);
-        
-//        // putting edit button action
-//        Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>> cellFactory = new Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>>() {
-//            @Override
-//            public TableCell<Cliente, String> call(TableColumn<Cliente, String> param) {
-//                final TableCell<Cliente, String> cell = new TableCell<Cliente, String>() {
-//                    final Button btn = new Button("Editar");
-//                    
-//                    @Override
-//                    public void updateItem(Cliente cliente) {
-//                        
-//                    }
-//                }
-//            }
-//        };
     }
     
 }

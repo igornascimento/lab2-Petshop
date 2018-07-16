@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Cliente {
     private SimpleStringProperty nome;
     private SimpleStringProperty telefone;
     private Map<Integer, Pet> pets;
+    private Button btnAction = new Button("Editar");
 
     public Cliente() {
     }
@@ -72,6 +74,14 @@ public class Cliente {
 
     public void setPets(Map<Integer, Pet> pets) {
         this.pets = pets;
+    }
+    
+    public Button getBtnAction() {
+            return btnAction;
+    }
+
+    public void setBtnAction(Button btn) {
+            this.btnAction = btn;
     }
     
     public Pet buscarPetPorNome(String nomePet) {
