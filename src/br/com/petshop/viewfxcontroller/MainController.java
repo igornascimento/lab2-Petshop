@@ -156,20 +156,20 @@ public class MainController {
         table.setEditable(false);
         tableGeneralResults.getChildren().add(table);
         
-        // putting edit button action
-        Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>> cellFactory = new Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>>() {
-            @Override
-            public TableCell<Cliente, String> call(TableColumn<Cliente, String> param) {
-                final TableCell<Cliente, String> cell = new TableCell<Cliente, String>() {
-                    final Button btn = new Button("Editar");
-                    
-                    @Override
-                    public void updateItem() {
-                        
-                    }
-                }
-            }
-        };
+//        // putting edit button action
+//        Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>> cellFactory = new Callback<TableColumn<Cliente, String>, TableCell<Cliente, String>>() {
+//            @Override
+//            public TableCell<Cliente, String> call(TableColumn<Cliente, String> param) {
+//                final TableCell<Cliente, String> cell = new TableCell<Cliente, String>() {
+//                    final Button btn = new Button("Editar");
+//                    
+//                    @Override
+//                    public void updateItem(Cliente cliente) {
+//                        
+//                    }
+//                }
+//            }
+//        };
     }
     
 }
